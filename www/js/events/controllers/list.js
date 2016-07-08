@@ -5,9 +5,11 @@
         .module('app')
         .controller('ListController', ListController);
 
-    ListController.$inject = [];
-    function ListController() {
+    ListController.$inject = ['$stateParams'];
+    function ListController($stateParams) {
         var vm = this;
+
+        vm.date = new Date($stateParams.year + '/' + $stateParams.month  + '/' + $stateParams.day);
 
         vm.testEvents = [{
             name: 'Authentic Street Food',
