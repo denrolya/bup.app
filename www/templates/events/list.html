@@ -1,0 +1,34 @@
+<ion-view>
+    <ion-nav-title>
+        <strong style="font-size: 24px;">BP</strong>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-ios-calendar-outline" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-search" menu-toggle="right"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader" align-title="left">
+        <div class="row responsive-sm">
+            <div class="col day">Today</div>
+            <div class="col date">01.07.2016</div>
+        </div>
+    </ion-header-bar>
+
+    <ion-content class="has-subheader">
+        <ion-list class="event-list">
+            <ion-item class="event-list-item" ng-repeat="event in vm.testEvents" style="background-image: url({{ event.coverImage }});">
+                <div class="event-description" ng-class-even="'text-right'">
+                    <span class="event-name">
+                        {{ event.name }}
+                    </span>
+                    <span class="event-location">
+                        District {{ event.location }}
+                    </span>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
