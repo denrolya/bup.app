@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad'])
+angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -20,6 +20,10 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad'])
                 StatusBar.styleDefault();
             }
         });
+    })
+
+    .filter('chunk', function(lodash) {
+        return lodash.memoize(lodash.chunk);
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -44,7 +48,10 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad'])
                         resolve: {
                             loadPlugin: function($ocLazyLoad) {
                                 return $ocLazyLoad.load([{
-                                    files: ['js/categories/controllers/list.js',]
+                                    files: [
+                                        'js/categories/assets/css/style.css',
+                                        'js/categories/controllers/list.js'
+                                    ]
                                 }])
                             }
                         }
@@ -81,6 +88,7 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad'])
                             loadPlugin: function($ocLazyLoad) {
                                 return $ocLazyLoad.load([{
                                     files: [
+                                        'js/events/assets/css/style.css',
                                         'js/events/controllers/list.js',
                                         'js/events/controllers/view.js',
                                     ]

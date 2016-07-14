@@ -1,0 +1,22 @@
+.category-tuple {
+    min-height: 35%;
+}
+
+.category-tuple .col {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.category {
+    padding-top: 80%;
+}
+
+.category-name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.header-text {
+    font-size: 28px;
+}

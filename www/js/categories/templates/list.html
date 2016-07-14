@@ -10,11 +10,17 @@
         <button class="button button-icon button-clear ion-ios-search" menu-toggle="right"></button>
     </ion-nav-buttons>
 
+    <ion-header-bar class="bar-subheader" align-title="left">
+        <span class="header-text">Categories</span>
+    </ion-header-bar>
+
     <ion-content class="has-subheader">
-        <ion-list>
-            <ion-item ng-repeat="category in vm.testCategories">
-                {{ category.name }}
-            </ion-item>
-        </ion-list>
+        <div class="row category-tuple" ng-repeat="categoryTuple in vm.testCategories | chunk : 2" ng-class-even="'text-right'">
+            <div class="col col-50" ng-repeat="category in categoryTuple" style="background-image: url({{ category.coverImage }});">
+                <div class="category">
+                    <span class="category-name">{{ category.name }}</span>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
