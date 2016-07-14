@@ -9,7 +9,7 @@
     function ListController() {
         var vm = this;
 
-        vm.categories = [
+        vm.testCategories = [
             { name: 'Shopping' },
             { name: 'Festivals & Exhibitions' },
             { name: 'Restaurants & Cafes' },

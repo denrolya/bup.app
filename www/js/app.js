@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers'])
+angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -40,7 +40,14 @@ angular.module('app', ['ionic', 'app.controllers'])
                     'menuContent': {
                         templateUrl: 'js/categories/templates/list.html',
                         controller: 'ListController',
-                        controllerAs: 'vm'
+                        controllerAs: 'vm',
+                        resolve: {
+                            loadPlugin: function($ocLazyLoad) {
+                                return $ocLazyLoad.load([{
+                                    files: ['js/categories/controllers/list.js',]
+                                }])
+                            }
+                        }
                     }
                 }
             })
@@ -51,7 +58,14 @@ angular.module('app', ['ionic', 'app.controllers'])
                     'menuContent': {
                         templateUrl: 'js/calendar/templates/calendar.html',
                         controller: 'CalendarController',
-                        controllerAs: 'vm'
+                        controllerAs: 'vm',
+                        resolve: {
+                            loadPlugin: function($ocLazyLoad) {
+                                return $ocLazyLoad.load([{
+                                    files: ['js/calendar/controllers/calendar.js',]
+                                }])
+                            }
+                        }
                     }
                 }
             })
@@ -62,7 +76,17 @@ angular.module('app', ['ionic', 'app.controllers'])
                     'menuContent': {
                         templateUrl: 'js/events/templates/list.html',
                         controller: 'ListController',
-                        controllerAs: 'vm'
+                        controllerAs: 'vm',
+                        resolve: {
+                            loadPlugin: function($ocLazyLoad) {
+                                return $ocLazyLoad.load([{
+                                    files: [
+                                        'js/events/controllers/list.js',
+                                        'js/events/controllers/view.js',
+                                    ]
+                                }])
+                            }
+                        }
                     }
                 }
             })

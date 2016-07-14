@@ -8,7 +8,5 @@
     ViewController.$inject = ['$stateParams'];
     function ViewController($stateParams) {
         var vm = this;
-
-        console.log($stateParams);
     }
 })();
