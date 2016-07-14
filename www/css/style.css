@@ -32,6 +32,11 @@ body, .bar.bar-stable .title {
     }
 }
 
+.event-list-item.item-complex  .item-content {
+    background: none;
+    padding: 0;
+}
+
 .event-list-item {
     color: white;
     padding-top: 50px;
@@ -39,7 +44,11 @@ body, .bar.bar-stable .title {
     background-repeat: no-repeat
 }
 
-.event-list-item .event-name {
+.event-list-item .event-description {
+    padding: 0px 20px 10px 20px;
+}
+
+.event-description .event-name {
     margin-top: 14%;
     font-weight: bold;
     font-size: 35px;
@@ -47,6 +56,57 @@ body, .bar.bar-stable .title {
     margin-bottom: 20px;
 }
 
-.event-list-item .event-location {
+.event-description .event-location {
     display: block;
+}
+
+
+
+
+/*==================================
+=            Event page            =
+==================================*/
+.event-hero-image {
+    height: 200px;
+    background-size: contain;
+    width:100%;
+}
+
+.event-hero-image.event-hero-image-with-captions {
+    height: 230px;
+    position: relative;
+}
+
+.event-hero-image-with-captions .event-hero-image-captions {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #1e1e1e;
+    height: 35%;
+    color: white;
+    padding: 10px 40px;
+}
+
+.event-hero-image-captions .event-address {
+    letter-spacing: .1em;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.event-hero-image-captions .event-category {
+    font-size: 14px;
+}
+
+.event-hero-image-captions .event-distance {
+    font-size: 18px;
+}
+
+.event-paragraphs {
+    padding: 25px 50px;
+}
+
+.event-paragraphs p {
+    font-size: 16px;
+    line-height: 1.3em;
 }

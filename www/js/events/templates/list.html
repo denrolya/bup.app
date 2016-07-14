@@ -19,7 +19,7 @@
 
     <ion-content class="has-subheader">
         <ion-list class="event-list">
-            <ion-item class="event-list-item" ng-repeat="event in vm.testEvents" style="background-image: url({{ event.coverImage }});">
+            <ion-item class="event-list-item" ui-sref="app.events.view({ slug : event.eventSlug })" ng-repeat="event in vm.testEvents" style="background-image: url({{ event.coverImage }});">
                 <div class="event-description" ng-class-even="'text-right'">
                     <span class="event-name">
                         {{ event.name }}

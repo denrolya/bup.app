@@ -34,20 +34,13 @@ angular.module('app', ['ionic', 'app.controllers'])
                 controller: 'AppCtrl'
             })
 
-            .state('app.search', {
-                url: '/search',
+            .state('app.categories', {
+                url: '/categories',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/search.html'
-                    }
-                }
-            })
-
-            .state('app.browse', {
-                url: '/browse',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/browse.html'
+                        templateUrl: 'js/categories/templates/list.html',
+                        controller: 'ListController',
+                        controllerAs: 'vm'
                     }
                 }
             })
@@ -62,6 +55,7 @@ angular.module('app', ['ionic', 'app.controllers'])
                     }
                 }
             })
+
             .state('app.events', {
                 url: '/events/:day/:month/:year',
                 views: {
@@ -73,15 +67,16 @@ angular.module('app', ['ionic', 'app.controllers'])
                 }
             })
 
-            .state('app.single', {
-                url: '/playlists/:playlistId',
+            .state('app.events.view', {
+                url: '/:slug',
                 views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlist.html',
-                        controller: 'PlaylistCtrl'
+                    'menuContent@app': {
+                        templateUrl: 'js/events/templates/view.html',
+                        controller: 'ViewController',
+                        controllerAs: 'vm'
                     }
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/calendar');
+        $urlRouterProvider.otherwise('/app/categories');
     });

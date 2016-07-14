@@ -13,18 +13,22 @@
 
         vm.testEvents = [{
             name: 'Authentic Street Food',
+            eventSlug: 'authentic-street-food',
             location: 'VI',
             coverImage: 'img/auth_street_food.jpg'
         }, {
             name: 'DJ Something',
+            eventSlug: 'dj-something',
             location: 'XIII',
             coverImage: 'img/dj.jpg'
         }, {
             name: 'Museums',
+            eventSlug: 'museums',
             location: 'VII',
             coverImage: 'img/museums.jpg'
         }, {
             name: "Rock'n'Roller",
+            eventSlug: 'rock-n-roller',
             location: 'V',
             coverImage: 'img/rocknroller.jpg'
         }];
