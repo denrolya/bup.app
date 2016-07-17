@@ -1,0 +1,52 @@
+<ion-view>
+    <ion-nav-title>
+        <strong style="font-size: 24px;">BP</strong>
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-search" menu-toggle="right"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader" align-title="left" ng-if="vm.currentActiveTab == 0">
+        <span class="header-text">Favourites</span>
+    </ion-header-bar>
+    <ion-header-bar class="bar-subheader" align-title="left" ng-if="vm.currentActiveTab == 1">
+        <span class="header-text">Categories</span>
+    </ion-header-bar>
+    <ion-header-bar class="bar-subheader" align-title="left" ng-if="vm.currentActiveTab == 2">
+        <span class="header-text">Calendar</span>
+    </ion-header-bar>
+
+    <ion-content class="has-subheader">
+        <ion-slide-box show-pager="false" active-slide="vm.currentActiveTab" on-slide-changed="vm.tabHasChanged($index)">
+            <ion-slide>
+                <div class="">
+                    <h1>Favourites</h1>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <ion-list class="bg-image-list">
+                    <ion-item class="bg-image-list-item" ng-repeat="category in vm.testCategories" style="background-image: url({{ category.coverImage }});">
+                        <div class="description" ng-class-even="'text-right'">
+                            <span class="text-content">
+                                {{ category.name }}
+                            </span>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+            <ion-slide>
+                <div class="">
+                    <ion-list class="calendar-list" type="list-inset">
+                        <ion-item ui-sref="app.events({ day:  (date | date : 'dd'), month:  (date | date : 'MM'), year:  (date | date : 'yyyy') })" class="calendar-list-item" ng-repeat="date in vm.testDates" style="background-image: url({{ event.coverImage }});">
+                            {{ date | date }}
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>

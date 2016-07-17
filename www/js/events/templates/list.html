@@ -4,7 +4,7 @@
     </ion-nav-title>
 
     <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-ios-calendar-outline" menu-toggle="left"></button>
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-ios-search" menu-toggle="right"></button>
@@ -18,10 +18,10 @@
     </ion-header-bar>
 
     <ion-content class="has-subheader">
-        <ion-list class="event-list">
-            <ion-item class="event-list-item" ui-sref="app.events.view({ slug : event.eventSlug })" ng-repeat="event in vm.testEvents" style="background-image: url({{ event.coverImage }});">
-                <div class="event-description" ng-class-even="'text-right'">
-                    <span class="event-name">
+        <ion-list class="bg-image-list">
+            <ion-item class="bg-image-list-item" ui-sref="app.events.view({ slug : event.eventSlug })" ng-repeat="event in vm.testEvents" style="background-image: url({{ event.coverImage }});">
+                <div class="description" ng-class-even="'text-right'">
+                    <span class="text-content">
                         {{ event.name }}
                     </span>
                     <span class="event-location">

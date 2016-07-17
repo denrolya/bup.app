@@ -26,7 +26,9 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
         return lodash.memoize(lodash.chunk);
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    .config(function ($urlMatcherFactoryProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+        $urlMatcherFactoryProvider.strictMode(false);
+
         $ionicConfigProvider.navBar.alignTitle('center');
 
         $stateProvider
@@ -36,6 +38,27 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                 abstract: true,
                 templateUrl: 'templates/menu.html',
                 controller: 'AppCtrl'
+            })
+
+            .state('app.index', {
+                url: '/index/:tabIndex',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'js/index/templates/index.html',
+                        controller: 'IndexController',
+                        controllerAs: 'vm',
+                        resolve: {
+                            loadPlugin: function($ocLazyLoad) {
+                                return $ocLazyLoad.load([{
+                                    files: [
+                                        'js/events/assets/css/style.css',
+                                        'js/index/controllers/index.js'
+                                    ]
+                                }])
+                            }
+                        }
+                    }
+                }
             })
 
             .state('app.categories', {
@@ -52,24 +75,6 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                                         'js/categories/assets/css/style.css',
                                         'js/categories/controllers/list.js'
                                     ]
-                                }])
-                            }
-                        }
-                    }
-                }
-            })
-
-            .state('app.calendar', {
-                url: '/calendar',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'js/calendar/templates/calendar.html',
-                        controller: 'CalendarController',
-                        controllerAs: 'vm',
-                        resolve: {
-                            loadPlugin: function($ocLazyLoad) {
-                                return $ocLazyLoad.load([{
-                                    files: ['js/calendar/controllers/calendar.js',]
                                 }])
                             }
                         }
@@ -110,5 +115,5 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/categories');
+        $urlRouterProvider.otherwise('/app/index/');
     });

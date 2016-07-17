@@ -31,3 +31,27 @@ body, .bar.bar-stable .title {
         margin-bottom: 0;
     }
 }
+
+.bg-image-list-item.item-complex .item-content {
+    background: none;
+    padding: 0;
+}
+
+.bg-image-list-item {
+    color: white;
+    padding-top: 50px;
+    background-size: 100%;
+    background-repeat: no-repeat
+}
+
+.bg-image-list-item .description {
+    padding: 0px 20px 10px 20px;
+}
+
+.bg-image-list-item .description .text-content {
+    margin-top: 14%;
+    font-weight: bold;
+    font-size: 35px;
+    display: block;
+    margin-bottom: 20px;
+}

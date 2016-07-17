@@ -13,19 +13,19 @@
             name: 'Shopping',
             coverImage: 'img/shopping.jpg'
         }, {
-            name: 'Festivals & Exhibitions' ,
+            name: 'Festivals & Exhibitions',
             coverImage: 'img/festival.jpg'
         }, {
-            name: 'Restaurants & Cafes' ,
+            name: 'Restaurants & Cafes',
             coverImage: 'img/cafe.jpg'
         }, {
-            name: 'Sports & Outdoors' ,
+            name: 'Sports & Outdoors',
             coverImage: 'img/sport.jpg'
         }, {
-            name: 'We Recommend' ,
+            name: 'We Recommend',
             coverImage: 'img/we_recommend.jpg'
         }, {
-            name: 'Nightlife' ,
+            name: 'Nightlife',
             coverImage: 'img/nightlife.jpg'
         }];
     }
