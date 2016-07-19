@@ -61,19 +61,19 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                 }
             })
 
-            .state('app.categories', {
-                url: '/categories',
+            .state('app.category', {
+                url: '/category/:categorySlug',
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/categories/templates/list.html',
-                        controller: 'ListController',
+                        templateUrl: 'js/categories/templates/view.html',
+                        controller: 'ViewController',
                         controllerAs: 'vm',
                         resolve: {
                             loadPlugin: function($ocLazyLoad) {
                                 return $ocLazyLoad.load([{
                                     files: [
                                         'js/categories/assets/css/style.css',
-                                        'js/categories/controllers/list.js'
+                                        'js/categories/controllers/view.js'
                                     ]
                                 }])
                             }

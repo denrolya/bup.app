@@ -22,7 +22,7 @@
             </ion-slide>
             <ion-slide>
                 <ion-list class="bg-image-list">
-                    <ion-item class="bg-image-list-item" ng-repeat="category in vm.testCategories" style="background-image: url({{ category.coverImage }});">
+                    <ion-item class="bg-image-list-item" ui-sref="app.category({categorySlug: category.slug})" ng-repeat="category in vm.testCategories" style="background-image: url({{ category.coverImage }});">
                         <div class="description">
                             <span class="text-content">
                                 {{ category.name }}

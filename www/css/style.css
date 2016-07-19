@@ -3,8 +3,9 @@
 ==============================*/
 .bar-subheader {
     height: 60px;
-    font-size: 20px;
-    padding: 20px 0px 0px 50px;
+    font-size: 25px;
+    line-height: 60px;
+    padding-left: 50px;
 }
 
 .has-subheader {
@@ -19,8 +20,16 @@ html, body {
     margin: 0;
 }
 
+.row.row-unpadded, .row.row-unpadded .col {
+    padding: 0;
+}
+
 body, .bar.bar-stable .title {
     color: #464444;
+}
+
+.bar-subheader .header-text-image {
+    color: #fff;
 }
 
 .bar-subheader .row {
@@ -45,9 +54,11 @@ body, .bar.bar-stable .title {
     }
 }
 
-.bg-image-list-item.item-complex .item-content {
+.bg-image-list-item.item-complex a.item-content {
+    display: inline;
     background: none;
     padding: 0;
+    color: #fff;
 }
 
 .bg-image-list-item {
@@ -57,8 +68,30 @@ body, .bar.bar-stable .title {
     background-repeat: no-repeat
 }
 
-.bg-image-list-item .description .text-content {
+.bg-image-list-item.bg-list-item-with-description {
+    padding: 40px 50px;
+}
+
+.bg-image-list-item .text-content {
     font-weight: bold;
     font-size: 35px;
     display: block;
+}
+
+.bg-image-list-item.bg-list-item-with-description .text-content span.header {
+    font-size: 30px
+}
+
+.bg-image-list-item.bg-list-item-with-description .text-content p.description {
+    margin-top: 10px;
+    width: 80%;
+    color: #fff;
+    font-size: 13px;
+    white-space: normal;
+}
+
+.bg-image-list-item.bg-list-item-with-description .text-content span.distance {
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
 }

@@ -42,24 +42,27 @@
             return vm.testCategories.length == 0
                     ? [{
                 name: 'Cafes',
+                slug: 'cafes',
                 coverImage: 'img/Pix/city-cars-traffic-lights-large.jpeg'
             }, {
                 name: 'Film & Culture',
+                slug: 'culture',
                 coverImage: 'img/Pix/city-people-lights-village-large.jpg'
             }, {
                 name: 'Health & Fitness',
+                slug: 'fitness',
                 coverImage: 'img/Pix/city-traffic-vehicles-people-large.jpg'
-            }, {
-                name: 'Sports & Outdoors',
-                coverImage: 'img/Pix/pexels-photo-45922-large.jpeg'
-            }, {
+            },{
                 name: 'Nightclubs',
+                slug: 'nightclubs',
                 coverImage: 'img/Pix/people-party-dancing-music-large.jpg'
             }, {
                 name: 'Bars & Pubs',
+                slug: 'pubs',
                 coverImage: 'img/Pix/pexels-photo-116025-large.jpeg'
             }, {
                 name: 'Shopping',
+                slug: 'shopping',
                 coverImage: 'img/Pix/SW_Dylan+Rives-large.jpg'
             }]
                 : vm.testCategories;

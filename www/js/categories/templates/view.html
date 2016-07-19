@@ -1,0 +1,34 @@
+<ion-view>
+    <ion-nav-title>
+        <strong style="font-size: 24px;">BP</strong>
+    </ion-nav-title>
+
+    <ion-header-bar class="bar-subheader" align-title="left" style="background: url('img/Pix/city-cars-traffic-lights-large.jpeg');">
+        <span class="header-text header-text-image">
+            Cafes
+        </span>
+    </ion-header-bar>
+
+    <ion-content class="has-subheader">
+        <div class="row header-divider">
+            <div class="date-state">Open Today</div>
+        </div>
+        <ion-list class="bg-image-list">
+            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category({categorySlug: category.slug})" ng-repeat="item in vm.testItems" style="background-image: url({{ item.coverImage }});">
+                <span class="text-content">
+                    <span class="header">{{ item.name }}</span>
+                    <div class="row row-unpadded">
+                        <div class="col col-90">
+                            <p class="description">{{ item.shortDescription }}</p>
+                        </div>
+                        <div class="col col-10">
+                            <span class="distance">
+                                {{ item.distance }}km
+                            </span>
+                        </div>
+                    </div>
+                </span>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
