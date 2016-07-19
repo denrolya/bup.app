@@ -3,13 +3,6 @@
         <strong style="font-size: 24px;">BP</strong>
     </ion-nav-title>
 
-    <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-ios-search" menu-toggle="right"></button>
-    </ion-nav-buttons>
-
     <ion-header-bar class="bar-subheader" align-title="left" ng-if="vm.currentActiveTab == 0">
         <span class="header-text">Favourites</span>
     </ion-header-bar>
@@ -30,7 +23,7 @@
             <ion-slide>
                 <ion-list class="bg-image-list">
                     <ion-item class="bg-image-list-item" ng-repeat="category in vm.testCategories" style="background-image: url({{ category.coverImage }});">
-                        <div class="description" ng-class-even="'text-right'">
+                        <div class="description">
                             <span class="text-content">
                                 {{ category.name }}
                             </span>

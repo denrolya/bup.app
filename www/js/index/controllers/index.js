@@ -41,41 +41,26 @@
         function getCategories() {
             return vm.testCategories.length == 0
                     ? [{
-                name: 'Shopping',
-                coverImage: 'img/shopping.jpg'
+                name: 'Cafes',
+                coverImage: 'img/Pix/city-cars-traffic-lights-large.jpeg'
             }, {
-                name: 'Festivals & Exhibitions',
-                coverImage: 'img/festival.jpg'
+                name: 'Film & Culture',
+                coverImage: 'img/Pix/city-people-lights-village-large.jpg'
             }, {
-                name: 'Restaurants & Cafes',
-                coverImage: 'img/cafe.jpg'
-            }, {
-                name: 'Sports & Outdoors',
-                coverImage: 'img/sport.jpg'
-            }, {
-                name: 'We Recommend',
-                coverImage: 'img/we_recommend.jpg'
-            }, {
-                name: 'Nightlife',
-                coverImage: 'img/nightlife.jpg'
-            }, {
-                name: 'Shopping',
-                coverImage: 'img/shopping.jpg'
-            }, {
-                name: 'Festivals & Exhibitions',
-                coverImage: 'img/festival.jpg'
-            }, {
-                name: 'Restaurants & Cafes',
-                coverImage: 'img/cafe.jpg'
+                name: 'Health & Fitness',
+                coverImage: 'img/Pix/city-traffic-vehicles-people-large.jpg'
             }, {
                 name: 'Sports & Outdoors',
-                coverImage: 'img/sport.jpg'
+                coverImage: 'img/Pix/pexels-photo-45922-large.jpeg'
             }, {
-                name: 'We Recommend',
-                coverImage: 'img/we_recommend.jpg'
+                name: 'Nightclubs',
+                coverImage: 'img/Pix/people-party-dancing-music-large.jpg'
             }, {
-                name: 'Nightlife',
-                coverImage: 'img/nightlife.jpg'
+                name: 'Bars & Pubs',
+                coverImage: 'img/Pix/pexels-photo-116025-large.jpeg'
+            }, {
+                name: 'Shopping',
+                coverImage: 'img/Pix/SW_Dylan+Rives-large.jpg'
             }]
                 : vm.testCategories;
         }

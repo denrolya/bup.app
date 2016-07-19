@@ -1,5 +1,18 @@
+/*==============================
+=    Global Ionic Overrides    =
+==============================*/
+.bar-subheader {
+    height: 60px;
+    font-size: 20px;
+    padding: 20px 0px 0px 50px;
+}
+
+.has-subheader {
+    top: 104px;
+}
+
 html, body {
-    font-family: 'PT Sans';
+    /*font-family: 'PT Sans';*/
 }
 
 .row {
@@ -39,19 +52,13 @@ body, .bar.bar-stable .title {
 
 .bg-image-list-item {
     color: white;
-    padding-top: 50px;
+    padding: 65px 50px;
     background-size: 100%;
     background-repeat: no-repeat
 }
 
-.bg-image-list-item .description {
-    padding: 0px 20px 10px 20px;
-}
-
 .bg-image-list-item .description .text-content {
-    margin-top: 14%;
     font-weight: bold;
     font-size: 35px;
     display: block;
-    margin-bottom: 20px;
 }
