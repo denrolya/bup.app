@@ -1,56 +1,87 @@
 /*==================================
 =        Event listing page        =
 ==================================*/
-.description .event-location {
+.description .category-entry-location {
     display: block;
 }
 
 
 /*==================================
+    TODO: Rename all of those classes
+    TODO: Move these styles to the global stylesheets
+    TODO: Refactor styles to match the most recent mocks
+==================================*/
+
+/*==================================
 =            Event page            =
 ==================================*/
-.event-hero-image {
-    height: 200px;
+.category-entry-hero-image {
+    height: 180px;
     background-repeat: no-repeat;
     background-size: cover;
     width:100%;
 }
 
-.event-hero-image.event-hero-image-with-captions {
-    height: 230px;
+.category-entry-hero-image-with-captions {
     position: relative;
 }
 
-.event-hero-image-with-captions .event-hero-image-captions {
+.category-entry-hero-image-captions {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #1e1e1e;
-    height: 35%;
     color: white;
-    padding: 10px 40px;
+    top: 25%;
 }
 
-.event-hero-image-captions .event-address {
+.category-entry-hero-image-captions > span {
+    display: block;
+    line-height: 1.3em;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+
+.ehic-big {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.ehic-small {
+    font-size: 1em;
+}
+
+.ehic-med {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.category-entry-header {
+    width: 100%;
+    background: #414040;
+    color: white;
+    padding: 10px 40px;
+    font-weight: bold;
+}
+
+.category-entry-rates {
+    padding: 0 0 0 40px;
+}
+
+.category-entry-hero-image-captions .category-entry-address {
     letter-spacing: .1em;
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.event-hero-image-captions .event-category {
-    font-size: 14px;
-}
-
-.event-hero-image-captions .event-distance {
-    font-size: 18px;
-}
-
-.event-paragraphs {
+.category-entry-paragraphs {
     padding: 25px 50px;
 }
 
-.event-paragraphs p {
+.category-entry-paragraphs p {
     font-size: 16px;
     line-height: 1.3em;
+}
+
+.category-entry-credentials a {
+    color: #363641;
+    text-decoration: underline;
 }

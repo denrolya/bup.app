@@ -65,15 +65,15 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                 url: '/category/:categorySlug',
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/categories/templates/view.html',
-                        controller: 'ViewController',
+                        templateUrl: 'js/categories/templates/category.view.html',
+                        controller: 'CategoryViewController',
                         controllerAs: 'vm',
                         resolve: {
                             loadPlugin: function($ocLazyLoad) {
                                 return $ocLazyLoad.load([{
                                     files: [
                                         'js/categories/assets/css/style.css',
-                                        'js/categories/controllers/view.js'
+                                        'js/categories/controllers/category.view.js'
                                     ]
                                 }])
                             }
@@ -104,6 +104,27 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                 }
             })
 
+            .state('app.category.entry', {
+                url: '/:entrySlug',
+                views: {
+                    'menuContent@app': {
+                        templateUrl: 'js/categories/templates/entry.view.html',
+                        controller: 'EntryViewController',
+                        controllerAs: 'vm',
+                        resolve: {
+                            loadPlugin: function($ocLazyLoad) {
+                                return $ocLazyLoad.load([{
+                                    files: [
+                                        'js/events/assets/css/style.css',
+                                        'js/categories/controllers/entry.view.js'
+                                    ]
+                                }])
+                            }
+                        }
+                    }
+                }
+            })
+
             .state('app.events.view', {
                 url: '/:slug',
                 views: {
@@ -114,6 +135,6 @@ angular.module('app', ['ionic', 'app.controllers', 'oc.lazyLoad', 'ngLodash'])
                     }
                 }
             });
-        // if none of the above states are matched, use this as the fallback
+
         $urlRouterProvider.otherwise('/app/index/');
     });

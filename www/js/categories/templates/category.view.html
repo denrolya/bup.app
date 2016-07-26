@@ -10,11 +10,11 @@
     </ion-header-bar>
 
     <ion-content class="has-subheader">
-        <div class="row header-divider">
-            <div class="date-state">Open Today</div>
-        </div>
+        <!--<div class="row header-divider">-->
+            <!--<div class="date-state">Open Today</div>-->
+        <!--</div>-->
         <ion-list class="bg-image-list">
-            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category({categorySlug: category.slug})" ng-repeat="item in vm.testItems" style="background-image: url({{ item.coverImage }});">
+            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category.entry({categorySlug: vm.categorySlug, entrySlug: item.slug})" ng-repeat="item in vm.testItems" style="background-image: url({{ item.coverImage }});">
                 <span class="text-content">
                     <span class="header">{{ item.name }}</span>
                     <div class="row row-unpadded">

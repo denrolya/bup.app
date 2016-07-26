@@ -3,11 +3,13 @@
 
     angular
         .module('app')
-        .controller('ViewController', ViewController);
+        .controller('CategoryViewController', CategoryViewController);
 
-    ViewController.$inject = [];
-    function ViewController() {
+    CategoryViewController.$inject = ['$stateParams'];
+    function CategoryViewController($stateParams) {
         var vm = this;
+
+        vm.categorySlug = $stateParams.categorySlug;
 
         vm.testItems = [{
             name: "Lehel Tér Market",
