@@ -81,6 +81,11 @@
     line-height: 1.3em;
 }
 
+.category-entry-credentials .header {
+    color: #a0a0a0;
+    padding-left: 40px;
+}
+
 .category-entry-credentials a {
     color: #363641;
     text-decoration: underline;
