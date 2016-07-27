@@ -13,24 +13,28 @@
 
         vm.testEvents = [{
             name: 'Authentic Street Food',
-            eventSlug: 'authentic-street-food',
-            location: 'VI',
-            coverImage: 'img/auth_street_food.jpg'
+            slug: 'authentic-street-food',
+            distance: '2.3',
+            shortDescription: 'Taste the most hungarian dishes in the open air food festival right in the heart of the city.',
+            coverImage: 'img/pexels-photo-87216-large.jpeg'
         }, {
             name: 'DJ Something',
-            eventSlug: 'dj-something',
-            location: 'XIII',
-            coverImage: 'img/dj.jpg'
+            slug: 'dj-something',
+            distance: '2.4',
+            shortDescription: 'Feel the rhythm, of that psycho.',
+            coverImage: 'img/city-people-lights-village-large.jpg'
         }, {
-            name: 'Museums',
-            eventSlug: 'museums',
-            location: 'VII',
-            coverImage: 'img/museums.jpg'
+            name: 'Sziget Fesztival 2016',
+            slug: 'sziget-fesztival-2016',
+            distance: '2.7',
+            shortDescription: "Festival that doesn't need no advertisment. Simply go there and have fun!",
+            coverImage: 'img/pexels-photo-116025-large.jpeg'
         }, {
             name: "Rock'n'Roller",
-            eventSlug: 'rock-n-roller',
-            location: 'V',
-            coverImage: 'img/rocknroller.jpg'
+            slug: 'rock-n-roller',
+            distance: '3.8',
+            shortDescription: "Watch Guy Ritchie's masterpiece on the open-air rooftop cinema.",
+            coverImage: 'img/people-party-dancing-music-large.jpg'
         }];
     }
 })();

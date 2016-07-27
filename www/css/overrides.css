@@ -1,0 +1,68 @@
+/*==============================
+=    Global Ionic Overrides    =
+==============================*/
+.bar-subheader {
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    padding-left: 50px;
+}
+
+.has-subheader {
+    top: 104px;
+}
+
+html, body {
+    /*font-family: 'PT Sans';*/
+}
+
+.row {
+    margin: 0;
+}
+
+.row.row-unpadded, .row.row-unpadded .col {
+    padding: 0;
+}
+
+body, .bar.bar-stable .title {
+    color: #464444;
+}
+
+.bar-subheader .header-text-image {
+    color: #fff;
+}
+
+.bar-subheader .row {
+    padding-left: 5px;
+}
+
+.bar-subheader .row, .bar-subheader .row .col {
+    padding: 0;
+}
+
+.bar-subheader .day {
+    font-size: 20px;
+}
+
+.bar-subheader .date {
+    color: #c9c9c9;
+}
+
+@media (max-width: 567px) {
+    .responsive-sm .col, .responsive-sm .col-10, .responsive-sm .col-20, .responsive-sm .col-25, .responsive-sm .col-33, .responsive-sm .col-34, .responsive-sm .col-50, .responsive-sm .col-66, .responsive-sm .col-67, .responsive-sm .col-75, .responsive-sm .col-80, .responsive-sm .col-90 {
+        margin-bottom: 0;
+    }
+}
+
+.text-balanced {
+    color: #98b48b;
+}
+
+.bg-balanced {
+    background: #98b48b;
+    background-color: #98b48b;
+}
+
+.button.button-balanced {
+    background-color: #98b48b;
+}

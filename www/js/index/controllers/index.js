@@ -43,27 +43,27 @@
                     ? [{
                 name: 'Cafes',
                 slug: 'cafes',
-                coverImage: 'img/Pix/city-cars-traffic-lights-large.jpeg'
+                coverImage: 'img/city-cars-traffic-lights-large.jpeg'
             }, {
                 name: 'Film & Culture',
                 slug: 'culture',
-                coverImage: 'img/Pix/city-people-lights-village-large.jpg'
+                coverImage: 'img/city-people-lights-village-large.jpg'
             }, {
                 name: 'Health & Fitness',
                 slug: 'fitness',
-                coverImage: 'img/Pix/city-traffic-vehicles-people-large.jpg'
+                coverImage: 'img/city-traffic-vehicles-people-large.jpg'
             },{
                 name: 'Nightclubs',
                 slug: 'nightclubs',
-                coverImage: 'img/Pix/people-party-dancing-music-large.jpg'
+                coverImage: 'img/people-party-dancing-music-large.jpg'
             }, {
                 name: 'Bars & Pubs',
                 slug: 'pubs',
-                coverImage: 'img/Pix/pexels-photo-116025-large.jpeg'
+                coverImage: 'img/pexels-photo-116025-large.jpeg'
             }, {
                 name: 'Shopping',
                 slug: 'shopping',
-                coverImage: 'img/Pix/SW_Dylan+Rives-large.jpg'
+                coverImage: 'img/SW_Dylan+Rives-large.jpg'
             }]
                 : vm.testCategories;
         }

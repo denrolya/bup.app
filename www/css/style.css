@@ -1,59 +1,6 @@
-/*==============================
-=    Global Ionic Overrides    =
-==============================*/
-.bar-subheader {
-    height: 60px;
-    font-size: 25px;
-    line-height: 60px;
-    padding-left: 50px;
-}
-
-.has-subheader {
-    top: 104px;
-}
-
-html, body {
-    /*font-family: 'PT Sans';*/
-}
-
-.row {
-    margin: 0;
-}
-
-.row.row-unpadded, .row.row-unpadded .col {
-    padding: 0;
-}
-
-body, .bar.bar-stable .title {
-    color: #464444;
-}
-
-.bar-subheader .header-text-image {
-    color: #fff;
-}
-
-.bar-subheader .row {
-    padding-left: 5px;
-}
-
-.bar-subheader .row, .bar-subheader .row .col {
-    padding: 0;
-}
-
-.bar-subheader .day {
-    font-size: 20px;
-}
-
-.bar-subheader .date {
-    color: #c9c9c9;
-}
-
-@media (max-width: 567px) {
-    .responsive-sm .col, .responsive-sm .col-10, .responsive-sm .col-20, .responsive-sm .col-25, .responsive-sm .col-33, .responsive-sm .col-34, .responsive-sm .col-50, .responsive-sm .col-66, .responsive-sm .col-67, .responsive-sm .col-75, .responsive-sm .col-80, .responsive-sm .col-90 {
-        margin-bottom: 0;
-    }
-}
-
+/*====================
+=    Listing pages   =
+====================*/
 .bg-image-list-item.item-complex a.item-content {
     display: inline;
     background: none;
@@ -94,4 +41,88 @@ body, .bar.bar-stable .title {
     font-size: 18px;
     position: absolute;
     bottom: 0;
+}
+
+
+/*=========================
+=  Event or Place Landing =
+=========================*/
+.landing-hero-image {
+    height: 180px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+}
+
+.landing-hero-image-with-captions {
+    position: relative;
+}
+
+.landing-hero-image-captions {
+    position: absolute;
+    color: white;
+    top: 25%;
+}
+
+.landing-hero-image-captions > span {
+    display: block;
+    line-height: 1.3em;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+
+.ehic-big {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.ehic-small {
+    font-size: 1em;
+}
+
+.ehic-med {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.landing-header {
+    width: 100%;
+    background: #414040;
+    color: white;
+    padding: 10px 40px;
+    font-weight: bold;
+}
+
+.landing-event-header {
+    background: #98b48b;
+}
+
+.landing-rates {
+    padding: 0 0 0 40px;
+}
+
+.landing-hero-image-captions .landing-address {
+    letter-spacing: .1em;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.landing-paragraphs {
+    padding: 25px 50px;
+}
+
+.landing-paragraphs p {
+    font-size: 16px;
+    line-height: 1.3em;
+}
+
+.landing-credentials .header {
+    color: #a0a0a0;
+    padding-left: 40px;
+}
+
+.landing-credentials a {
+    color: #363641;
+    text-decoration: underline;
 }
