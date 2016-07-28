@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Fabrica;
+    src: url("../fonts/Fabrica.otf") format("opentype");
+}
+
 /*====================
 =    Listing pages   =
 ====================*/
@@ -113,7 +118,7 @@
 }
 
 .landing-paragraphs p {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.3em;
 }
 

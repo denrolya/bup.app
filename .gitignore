@@ -4,9 +4,12 @@
 # IDE Files
 /.idea
 
+# Builds and keys
+/*.apk
+/*.keystore
+
 # Vendors
 /www/lib/*
-
 node_modules/
 platforms/
 plugins/
