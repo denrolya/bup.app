@@ -20,7 +20,7 @@
                                         files: [
                                             'js/events/assets/css/style.css',
                                             'js/events/controllers/list.js',
-                                            'js/events/controllers/view.js',
+                                            'js/events/controllers/view.js'
                                         ]
                                     }])
                                 }
@@ -38,6 +38,6 @@
                             controllerAs: 'vm'
                         }
                     }
-                })
+                });
         });
 })();
