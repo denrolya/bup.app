@@ -9,7 +9,7 @@
     function IndexController($stateParams, $state) {
         var vm = this;
 
-        vm.currentActiveTab = Number($stateParams.tabIndex || 1);
+        vm.currentActiveTab = Number($stateParams.tabIndex || 0);
         vm.testDates = [],
         vm.testCategories = [];
 
@@ -23,11 +23,9 @@
         function getData() {
             switch(vm.currentActiveTab) {
                 case 0:
-                    break;
-                case 1:
                     vm.testCategories = vm.getCategories();
                     break;
-                case 2:
+                case 1:
                     vm.testDates = vm.getDates();
                     break;
             }
