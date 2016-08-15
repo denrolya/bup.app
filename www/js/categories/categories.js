@@ -6,6 +6,7 @@
         .module('app')
         .config(function($stateProvider) {
             $stateProvider
+                // TODO: Define abstract state here
                 .state('app.category', {
                     url: '/category/:categorySlug',
                     views: {
@@ -18,6 +19,7 @@
                                     return $ocLazyLoad.load([{
                                         files: [
                                             'js/categories/assets/css/style.css',
+                                            'js/categories/resources/category.js',
                                             'js/categories/controllers/category.view.js'
                                         ]
                                     }])
@@ -39,6 +41,7 @@
                                     return $ocLazyLoad.load([{
                                         files: [
                                             'js/events/assets/css/style.css',
+                                            'js/categories/resources/category.js',
                                             'js/categories/controllers/entry.view.js'
                                         ]
                                     }])

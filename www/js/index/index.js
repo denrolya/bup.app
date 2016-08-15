@@ -18,6 +18,7 @@
                                     return $ocLazyLoad.load([{
                                         files: [
                                             'js/events/assets/css/style.css',
+                                            'js/categories/resources/category.js',
                                             'js/index/controllers/index.js'
                                         ]
                                     }])

@@ -6,7 +6,7 @@
         .module('app')
         .config(function($stateProvider) {
             $stateProvider
-
+                // TODO: Define abstract state here
                 .state('app.events', {
                     url: '/events/:day/:month/:year',
                     views: {
@@ -28,7 +28,6 @@
                         }
                     }
                 })
-
                 .state('app.events.view', {
                     url: '/:slug',
                     views: {

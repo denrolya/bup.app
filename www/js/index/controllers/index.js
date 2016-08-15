@@ -5,13 +5,13 @@
         .module('app')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$stateParams', '$state'];
-    function IndexController($stateParams, $state) {
+    IndexController.$inject = ['$stateParams', '$state', 'Category'];
+    function IndexController($stateParams, $state, Category) {
         var vm = this;
 
         vm.currentActiveTab = Number($stateParams.tabIndex || 0);
-        vm.testDates = [],
-        vm.testCategories = [];
+        vm.dates = [],
+        vm.categories = [];
 
         vm.getData = getData;
         vm.tabHasChanged = tabHasChanged;
@@ -23,7 +23,7 @@
         function getData() {
             switch(vm.currentActiveTab) {
                 case 0:
-                    vm.testCategories = vm.getCategories();
+                    vm.getCategories();
                     break;
                 case 1:
                     vm.testDates = vm.getDates();
@@ -37,33 +37,9 @@
         }
 
         function getCategories() {
-            return vm.testCategories.length == 0
-                    ? [{
-                name: 'Cafes',
-                slug: 'cafes',
-                coverImage: 'img/city-cars-traffic-lights-large.jpeg'
-            }, {
-                name: 'Film & Culture',
-                slug: 'culture',
-                coverImage: 'img/city-people-lights-village-large.jpg'
-            }, {
-                name: 'Health & Fitness',
-                slug: 'fitness',
-                coverImage: 'img/city-traffic-vehicles-people-large.jpg'
-            },{
-                name: 'Nightclubs',
-                slug: 'nightclubs',
-                coverImage: 'img/people-party-dancing-music-large.jpg'
-            }, {
-                name: 'Bars & Pubs',
-                slug: 'pubs',
-                coverImage: 'img/pexels-photo-116025-large.jpeg'
-            }, {
-                name: 'Shopping',
-                slug: 'shopping',
-                coverImage: 'img/SW_Dylan+Rives-large.jpg'
-            }]
-                : vm.testCategories;
+            Category.get(function(response) {
+                vm.categories = response.categories;
+            });
         }
 
         function getDates() {

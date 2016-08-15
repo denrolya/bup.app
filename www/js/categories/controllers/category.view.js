@@ -5,8 +5,8 @@
         .module('app')
         .controller('CategoryViewController', CategoryViewController);
 
-    CategoryViewController.$inject = ['$stateParams'];
-    function CategoryViewController($stateParams) {
+    CategoryViewController.$inject = ['$stateParams', 'Category'];
+    function CategoryViewController($stateParams, Category) {
         var vm = this;
 
         vm.categorySlug = $stateParams.categorySlug;
