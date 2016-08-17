@@ -6,11 +6,14 @@
         .module('app')
         .config(function($stateProvider) {
             $stateProvider
-                // TODO: Define abstract state here
                 .state('app.events', {
-                    url: '/events/:day/:month/:year',
+                    url: '/events',
+                    abstract: true,
+                })
+                .state('app.events.by-date', {
+                    url: '/:day/:month/:year',
                     views: {
-                        'menuContent': {
+                        'menuContent@app': {
                             templateUrl: 'js/events/templates/list.html',
                             controller: 'ListController',
                             controllerAs: 'vm',

@@ -6,12 +6,15 @@
         .module('app')
         .config(function($stateProvider) {
             $stateProvider
-                // TODO: Define abstract state here
                 .state('app.category', {
-                    url: '/category/:categorySlug',
+                    url: '/categories',
+                    abstract: true,
+                })
+                .state('app.category.list', {
+                    url: '/:categorySlug',
                     views: {
-                        'menuContent': {
-                            templateUrl: 'js/categories/templates/category.view.html',
+                        'menuContent@app': {
+                            templateUrl: 'js/categories/templates/list.html',
                             controller: 'CategoryViewController',
                             controllerAs: 'vm',
                             resolve: {
@@ -29,11 +32,11 @@
                     }
                 })
 
-                .state('app.category.entry', {
+                .state('app.category.view', {
                     url: '/:entrySlug',
                     views: {
                         'menuContent@app': {
-                            templateUrl: 'js/categories/templates/entry.view.html',
+                            templateUrl: 'js/categories/templates/view.html',
                             controller: 'EntryViewController',
                             controllerAs: 'vm',
                             resolve: {

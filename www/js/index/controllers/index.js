@@ -10,13 +10,11 @@
         var vm = this;
 
         vm.currentActiveTab = Number($stateParams.tabIndex || 0);
-        vm.dates = [],
-        vm.categories = [];
+        vm.dates = [], vm.categories = [];
 
         vm.getData = getData;
         vm.tabHasChanged = tabHasChanged;
         vm.getCategories = getCategories;
-        vm.getDates = getDates;
 
         vm.getData();
 
@@ -26,7 +24,9 @@
                     vm.getCategories();
                     break;
                 case 1:
-                    vm.testDates = vm.getDates();
+                    vm.dates = vm.dates.length == 0
+                        ? [new Date('07.01.2016'), new Date('07.02.2016')]
+                        : vm.dates;
                     break;
             }
         }
@@ -40,12 +40,6 @@
             Category.get(function(response) {
                 vm.categories = response.categories;
             });
-        }
-
-        function getDates() {
-            return vm.testDates.length == 0
-                ? [new Date('07.01.2016'), new Date('07.02.2016')]
-                : vm.testDates;
         }
     }
 })();
