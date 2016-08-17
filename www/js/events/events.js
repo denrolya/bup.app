@@ -9,25 +9,16 @@
                 .state('app.events', {
                     url: '/events',
                     abstract: true,
-                })
-                .state('app.events.by-date', {
-                    url: '/:day/:month/:year',
-                    views: {
-                        'menuContent@app': {
-                            templateUrl: 'js/events/templates/list.html',
-                            controller: 'ListController',
-                            controllerAs: 'vm',
-                            resolve: {
-                                loadPlugin: function($ocLazyLoad) {
-                                    return $ocLazyLoad.load([{
-                                        files: [
-                                            'js/events/assets/css/style.css',
-                                            'js/events/controllers/list.js',
-                                            'js/events/controllers/view.js'
-                                        ]
-                                    }])
-                                }
-                            }
+                    resolve: {
+                        loadPlugin: function($ocLazyLoad) {
+                            return $ocLazyLoad.load([{
+                                files: [
+                                    'js/events/assets/css/style.css',
+                                    'js/events/resources/event.js',
+                                    'js/events/controllers/list.js',
+                                    'js/events/controllers/view.js'
+                                ]
+                            }])
                         }
                     }
                 })
@@ -37,7 +28,24 @@
                         'menuContent@app': {
                             templateUrl: 'js/events/templates/view.html',
                             controller: 'ViewController',
-                            controllerAs: 'vm'
+                            controllerAs: 'vm',
+                            resolve: {
+                                event: ['Event', '$stateParams', function(Event, $stateParams) {
+                                    return Event.get({eventSlug: $stateParams.slug}, function(response) {
+                                        return response;
+                                    });
+                                }]
+                            }
+                        }
+                    }
+                })
+                .state('app.events.by-date', {
+                    url: '/:day/:month/:year',
+                    views: {
+                        'menuContent@app': {
+                            templateUrl: 'js/events/templates/list.html',
+                            controller: 'ListController',
+                            controllerAs: 'vm',
                         }
                     }
                 });

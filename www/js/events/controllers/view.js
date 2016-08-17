@@ -5,9 +5,13 @@
         .module('app')
         .controller('ViewController', ViewController);
 
-    ViewController.$inject = ['$stateParams', '$scope', '$ionicLoading'];
-    function ViewController($stateParams, $scope, $ionicLoading) {
+    ViewController.$inject = ['$scope', '$ionicLoading', 'event'];
+    function ViewController($scope, $ionicLoading, event) {
         var vm = this;
+
+        vm.event = event;
+        vm.event.dateFrom = new Date(vm.event.dateFrom);
+        vm.event.dateTo = new Date(vm.event.dateTo);
 
         google.maps.event.addDomListener(window, 'load', function() {
             var myLatlng = new google.maps.LatLng(37.3000, -120.4833);

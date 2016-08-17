@@ -9,6 +9,18 @@
                 .state('app.category', {
                     url: '/categories',
                     abstract: true,
+                    resolve: {
+                        loadPlugin: function($ocLazyLoad) {
+                            return $ocLazyLoad.load([{
+                                files: [
+                                    'js/categories/assets/css/style.css',
+                                    'js/categories/resources/category.js',
+                                    'js/categories/controllers/category.view.js',
+                                    'js/categories/controllers/entry.view.js'
+                                ]
+                            }])
+                        }
+                    }
                 })
                 .state('app.category.list', {
                     url: '/:categorySlug',
@@ -17,17 +29,6 @@
                             templateUrl: 'js/categories/templates/list.html',
                             controller: 'CategoryViewController',
                             controllerAs: 'vm',
-                            resolve: {
-                                loadPlugin: function($ocLazyLoad) {
-                                    return $ocLazyLoad.load([{
-                                        files: [
-                                            'js/categories/assets/css/style.css',
-                                            'js/categories/resources/category.js',
-                                            'js/categories/controllers/category.view.js'
-                                        ]
-                                    }])
-                                }
-                            }
                         }
                     }
                 })
@@ -39,17 +40,6 @@
                             templateUrl: 'js/categories/templates/view.html',
                             controller: 'EntryViewController',
                             controllerAs: 'vm',
-                            resolve: {
-                                loadPlugin: function($ocLazyLoad) {
-                                    return $ocLazyLoad.load([{
-                                        files: [
-                                            'js/events/assets/css/style.css',
-                                            'js/categories/resources/category.js',
-                                            'js/categories/controllers/entry.view.js'
-                                        ]
-                                    }])
-                                }
-                            }
                         }
                     }
                 })

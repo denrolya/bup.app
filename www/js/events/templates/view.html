@@ -6,27 +6,32 @@
     <ion-content>
         <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('img/pexels-photo-116025-large.jpeg');">
             <div class="landing-hero-image-captions">
-                <span class="ehic-big">Ferenciek Street Festival</span>
-                <span class="ehic-small">162 Ferenciek Utca, District VII</span>
+                <span class="ehic-big">{{ vm.event.title }}</span>
+                <span class="ehic-small">{{ vm.event.location }}</span>
                 <span class="ehic-med">1.8 km</span>
             </div>
         </div>
         <div class="landing-header landing-event-header">
             <div class="row">
-                <div class="col">21st July - 22nd July 2016</div>
+                <div class="col">
+                    <span>
+                        {{ vm.event.dateFrom | date : "d MMM" }}
+                    </span>
+                    <span ng-if="vm.event.dateTo">
+                         - {{ vm.event.dateTo | date : "d MMM yyyy" }}
+                    </span>
+                </div>
             </div>
         </div>
 
         <div class="landing-paragraphs">
-            <p>A pace forwards a cage. The gut thirsts near every infrastructure. Our dual choral exits around an emerging misery. A treasure gears the abroad electorate. Every biochemistry stares.</p>
-            <p>A less volume swears. The classic immortal tends the light. A strength starves the baking breach. Near the paradox writes a forthcoming accent.</p>
-            <p>A less volume swears. The classic immortal tends the light. A strength starves the baking breach. Near the paradox writes a forthcoming accent.</p>
+            <div ng-bind-html="vm.event.descriptionBlock1"></div>
         </div>
 
-        <div class="landing-hero-image" style="background-image: url('img/pexels-photo-large (5).jpg');"></div>
+        <div class="landing-hero-image" style="background-image: url({{ vm.event.images[1].uri }});"></div>
 
         <div class="landing-paragraphs">
-            <p>The obscene wit expires against the polish stomach. The charm bounces after a drill. The embedded cathedral lies behind a crown. Why does the poet bounce?</p>
+            <div ng-bind-html="vm.event.descriptionBlock2"></div>
         </div>
 
         <div class="landing-header">

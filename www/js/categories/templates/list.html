@@ -11,7 +11,7 @@
 
     <ion-content class="has-subheader">
         <ion-list class="bg-image-list">
-            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category.view.entry({categorySlug: vm.categorySlug, entrySlug: item.slug})" ng-repeat="item in vm.testItems" style="background-image: url({{ item.coverImage }});">
+            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category.view({categorySlug: vm.categorySlug, entrySlug: item.slug})" ng-repeat="item in vm.testItems" style="background-image: url({{ item.coverImage }});">
                 <span class="text-content">
                     <span class="header">{{ item.name }}</span>
                     <div class="row row-unpadded">
