@@ -5,15 +5,30 @@
         .module('app')
         .controller('ViewController', ViewController);
 
-    ViewController.$inject = ['$scope', '$ionicLoading', 'event'];
-    function ViewController($scope, $ionicLoading, event) {
+    ViewController.$inject = ['$scope', '$stateParams', 'Event'];
+    function ViewController($scope, $stateParams, Event) {
         var vm = this;
 
-        vm.event = event;
-        vm.event.dateFrom = new Date(vm.event.dateFrom);
-        vm.event.dateTo = new Date(vm.event.dateTo);
+        vm.event = {};
+
+        vm.getEvent = getEvent;
+        vm.initializeMap = initializeMap;
+
+        vm.getEvent();
 
         google.maps.event.addDomListener(window, 'load', function() {
+            vm.initializeMap()
+        });
+
+        function getEvent() {
+            Event.get({eventSlug: $stateParams.eventSlug}, function(response) {
+                response.dateFrom = new Date(response.dateFrom);
+                response.dateTo = new Date(response.dateTo);
+                vm.event = response;
+            });
+        }
+
+        function initializeMap() {
             var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
             var mapOptions = {
@@ -34,6 +49,6 @@
             });
 
             $scope.map = map;
-        });
+        }
     }
 })();

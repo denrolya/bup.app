@@ -9,7 +9,13 @@
     function EntryViewController($scope) {
         var vm = this;
 
+        vm.initializeMap = initializeMap;
+
         google.maps.event.addDomListener(window, 'load', function() {
+            vm.initializeMap()
+        });
+
+        function initializeMap() {
             var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
             var mapOptions = {
@@ -30,6 +36,6 @@
             });
 
             $scope.map = map;
-        });
+        }
     }
 })();

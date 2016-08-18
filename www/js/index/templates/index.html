@@ -26,7 +26,7 @@
             <ion-slide>
                 <div class="">
                     <ion-list class="calendar-list" type="list-inset">
-                        <ion-item ui-sref="app.events.by-date({ day:  (date | date : 'dd'), month:  (date | date : 'MM'), year:  (date | date : 'yyyy') })" class="calendar-list-item" ng-repeat="date in vm.dates" style="background-image: url({{ event.coverImage }});">
+                        <ion-item ui-sref="app.events.list({ day:  (date | date : 'dd'), month:  (date | date : 'MM'), year:  (date | date : 'yyyy') })" class="calendar-list-item" ng-repeat="date in vm.dates" style="background-image: url({{ event.coverImage }});">
                             {{ date | date }}
                         </ion-item>
                     </ion-list>

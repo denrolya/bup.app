@@ -22,29 +22,22 @@
                         }
                     }
                 })
-                .state('app.events.view', {
-                    url: '/:slug',
-                    views: {
-                        'menuContent@app': {
-                            templateUrl: 'js/events/templates/view.html',
-                            controller: 'ViewController',
-                            controllerAs: 'vm',
-                            resolve: {
-                                event: ['Event', '$stateParams', function(Event, $stateParams) {
-                                    return Event.get({eventSlug: $stateParams.slug}, function(response) {
-                                        return response;
-                                    });
-                                }]
-                            }
-                        }
-                    }
-                })
-                .state('app.events.by-date', {
+                .state('app.events.list', {
                     url: '/:day/:month/:year',
                     views: {
                         'menuContent@app': {
                             templateUrl: 'js/events/templates/list.html',
                             controller: 'ListController',
+                            controllerAs: 'vm',
+                        }
+                    }
+                })
+                .state('app.events.view', {
+                    url: '/:eventSlug',
+                    views: {
+                        'menuContent@app': {
+                            templateUrl: 'js/events/templates/view.html',
+                            controller: 'ViewController',
                             controllerAs: 'vm',
                         }
                     }

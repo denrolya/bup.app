@@ -11,7 +11,7 @@
 
     <ion-content class="has-subheader">
         <ion-list class="bg-image-list">
-            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.events.view({slug: event.slug})" ng-repeat="event in vm.events" style="background-image: url({{ event.images[0].uri }});">
+            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.events.view({eventSlug: event.slug})" ng-repeat="event in vm.events" style="background-image: url({{ event.images[0].uri }});">
                 <span class="text-content">
                     <span class="header">{{ event.title }}</span>
                     <div class="row row-unpadded">

@@ -34,7 +34,7 @@
                 })
 
                 .state('app.category.view', {
-                    url: '/:entrySlug',
+                    url: '/:categorySlug/:entrySlug',
                     views: {
                         'menuContent@app': {
                             templateUrl: 'js/categories/templates/view.html',
