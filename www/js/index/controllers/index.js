@@ -5,8 +5,8 @@
         .module('app')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$stateParams', '$state', 'Category'];
-    function IndexController($stateParams, $state, Category) {
+    IndexController.$inject = ['$stateParams', 'Category'];
+    function IndexController($stateParams, Category) {
         var vm = this;
 
         vm.currentActiveTab = Number($stateParams.tabIndex || 0);
