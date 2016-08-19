@@ -7,6 +7,12 @@
 
     Event.$inject = ['$resource'];
     function Event($resource) {
-        return $resource('http://bud.api/app_dev.php/api/secure/events/:eventSlug', {eventSlug: '@eventSlug'}, {});
+        return $resource('http://bud.api/app_dev.php/api/secure/events/:eventSlug', {eventSlug: '@eventSlug'}, {
+            getGroupedFromToday: {
+                method: 'GET',
+                url: 'http://bud.api/app_dev.php/api/secure/events/grouped',
+                isArray: false
+            }
+        });
     }
 })();

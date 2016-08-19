@@ -14,7 +14,7 @@
         <ion-slide-box show-pager="false" active-slide="vm.currentActiveTab" on-slide-changed="vm.tabHasChanged($index)">
             <ion-slide>
                 <ion-list class="bg-image-list">
-                    <ion-item class="bg-image-list-item" ui-sref="app.category.list({categorySlug: category.slug})" ng-repeat="category in vm.categories" style="background-image: url({{ category.coverImage.uri }});">
+                    <ion-item class="bg-image-list-item" ui-sref="app.category.list({categorySlug: category.slug})" ng-repeat="category in vm.categories" style="background-image: url('{{ category.coverImage.uri }}');">
                         <div class="description">
                             <span class="text-content">
                                 {{ category.name }}
@@ -25,11 +25,26 @@
             </ion-slide>
             <ion-slide>
                 <div class="">
-                    <ion-list class="calendar-list" type="list-inset">
-                        <ion-item ui-sref="app.events.list({ day:  (date | date : 'dd'), month:  (date | date : 'MM'), year:  (date | date : 'yyyy') })" class="calendar-list-item" ng-repeat="date in vm.dates" style="background-image: url({{ event.coverImage }});">
-                            {{ date | date }}
-                        </ion-item>
-                    </ion-list>
+                    <span class="calendar-list-item" ng-repeat="(date,events) in vm.events">
+                        {{ date }}
+                        <ion-list class="bg-image-list">
+                            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.events.view({eventSlug: event.slug})" ng-repeat="event in events" style="background-image: url('{{ event.images[0].uri }}');">
+                                <span class="text-content">
+                                    <span class="header">{{ event.title }}</span>
+                                    <div class="row row-unpadded">
+                                        <div class="col col-90">
+                                            <p class="description">{{ event.shortDescription }}</p>
+                                        </div>
+                                        <div class="col col-10">
+                                            <span class="distance">
+                                                2.3 km
+                                            </span>
+                                        </div>
+                                    </div>
+                                </span>
+                            </ion-item>
+                        </ion-list>
+                    </span>
                 </div>
             </ion-slide>
         </ion-slide-box>

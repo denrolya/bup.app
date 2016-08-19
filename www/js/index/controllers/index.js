@@ -5,8 +5,8 @@
         .module('app')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$stateParams', 'Category'];
-    function IndexController($stateParams, Category) {
+    IndexController.$inject = ['$stateParams', 'Category', 'Event'];
+    function IndexController($stateParams, Category, Event) {
         var vm = this;
 
         vm.currentActiveTab = Number($stateParams.tabIndex || 0);
@@ -15,6 +15,7 @@
         vm.getData = getData;
         vm.tabHasChanged = tabHasChanged;
         vm.getCategories = getCategories;
+        vm.getEvents = getEvents;
 
         vm.getData();
 
@@ -24,9 +25,7 @@
                     vm.getCategories();
                     break;
                 case 1:
-                    vm.dates = vm.dates.length == 0
-                        ? [new Date('07.01.2016'), new Date('07.02.2016')]
-                        : vm.dates;
+                    vm.getEvents();
                     break;
             }
         }
@@ -34,6 +33,12 @@
         function tabHasChanged(index) {
             vm.currentActiveTab = index;
             vm.getData();
+        }
+
+        function getEvents() {
+            Event.getGroupedFromToday(function(response) {
+                vm.events = response.events;
+            });
         }
 
         function getCategories() {
