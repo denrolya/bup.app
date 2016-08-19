@@ -6,39 +6,39 @@
         .module('app')
         .config(function($stateProvider) {
             $stateProvider
-                .state('app.category', {
+                .state('app.places', {
                     url: '/categories',
                     abstract: true,
                     resolve: {
                         loadPlugin: function($ocLazyLoad) {
                             return $ocLazyLoad.load([{
                                 files: [
-                                    'js/categories/assets/css/style.css',
-                                    'js/categories/resources/category.js',
-                                    'js/categories/controllers/category.view.js',
-                                    'js/categories/controllers/entry.view.js'
+                                    'js/places/assets/css/style.css',
+                                    'js/places/resources/place.js',
+                                    'js/places/controllers/list.js',
+                                    'js/places/controllers/view.js'
                                 ]
                             }])
                         }
                     }
                 })
-                .state('app.category.list', {
+                .state('app.places.list', {
                     url: '/:categorySlug',
                     views: {
                         'menuContent@app': {
-                            templateUrl: 'js/categories/templates/list.html',
-                            controller: 'CategoryViewController',
+                            templateUrl: 'js/places/templates/list.html',
+                            controller: 'ListController',
                             controllerAs: 'vm',
                         }
                     }
                 })
 
-                .state('app.category.view', {
-                    url: '/:categorySlug/:entrySlug',
+                .state('app.places.view', {
+                    url: '/:categorySlug/places/:placeSlug',
                     views: {
                         'menuContent@app': {
-                            templateUrl: 'js/categories/templates/view.html',
-                            controller: 'EntryViewController',
+                            templateUrl: 'js/places/templates/view.html',
+                            controller: 'ViewController',
                             controllerAs: 'vm',
                         }
                     }

@@ -19,7 +19,7 @@
                                         files: [
                                             'js/events/assets/css/style.css',
                                             'js/events/resources/event.js',
-                                            'js/categories/resources/category.js',
+                                            'js/index/resources/category.js',
                                             'js/index/controllers/index.js'
                                         ]
                                     }])

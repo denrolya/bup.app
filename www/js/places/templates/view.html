@@ -6,8 +6,8 @@
     <ion-content>
         <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('img/pexels-photo-116025-large.jpeg');">
             <div class="landing-hero-image-captions">
-                <span class="ehic-big">Makondo Cafe</span>
-                <span class="ehic-small">162 Rakoczi Utca, District VI</span>
+                <span class="ehic-big">{{ vm.place.name }}</span>
+                <span class="ehic-small">{{ vm.place.location }}</span>
                 <span class="ehic-med">2.1 km</span>
             </div>
         </div>
@@ -31,15 +31,13 @@
         </div>
 
         <div class="landing-paragraphs">
-            <p>A pace forwards a cage. The gut thirsts near every infrastructure. Our dual choral exits around an emerging misery. A treasure gears the abroad electorate. Every biochemistry stares.</p>
-            <p>A less volume swears. The classic immortal tends the light. A strength starves the baking breach. Near the paradox writes a forthcoming accent.</p>
-            <p>A less volume swears. The classic immortal tends the light. A strength starves the baking breach. Near the paradox writes a forthcoming accent.</p>
+            <div ng-bind-html="vm.place.descriptionBlock1"></div>
         </div>
 
         <div class="landing-hero-image" style="background-image: url('img/pexels-photo-large (5).jpg');"></div>
 
         <div class="landing-paragraphs">
-            <p>The obscene wit expires against the polish stomach. The charm bounces after a drill. The embedded cathedral lies behind a crown. Why does the poet bounce?</p>
+            <div ng-bind-html="vm.place.descriptionBlock2"></div>
         </div>
 
         <div class="landing-header">
@@ -60,19 +58,15 @@
         <div class="landing-credentials">
             <div class="row">
                 <div class="col header">Website:</div>
-                <div class="col col-67"><a href="#">http://macondo.com</a></div>
+                <div class="col col-67"><a href="#">{{ vm.place.website }}</a></div>
             </div>
             <div class="row">
                 <div class="col header">Telephone:</div>
-                <div class="col col-67"><a href="tel:0036707372913">0036707372913</a></div>
+                <div class="col col-67"><a href="tel:0036707372913">{{ vm.place.phonenumber }}</a></div>
             </div>
             <div class="row">
                 <div class="col header">Open:</div>
-                <div class="col col-67">
-                    Mon-Fri: 7:00 - 21:00<br>
-                    Sat: 7:30 - 16:30<br>
-                    Sun: Closed
-                </div>
+                <div class="col col-67">{{ vm.place.opened }}</div>
             </div>
         </div>
     </ion-content>

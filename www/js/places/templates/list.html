@@ -11,16 +11,16 @@
 
     <ion-content class="has-subheader">
         <ion-list class="bg-image-list">
-            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category.view({categorySlug: vm.categorySlug, entrySlug: item.slug})" ng-repeat="item in vm.testItems" style="background-image: url('{{ item.coverImage }}');">
+            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.places.view({categorySlug: vm.categorySlug, placeSlug: place.slug})" ng-repeat="place in vm.places" style="background-image: url('{{ place.images[0].uri }}');">
                 <span class="text-content">
-                    <span class="header">{{ item.name }}</span>
+                    <span class="header">{{ place.name }}</span>
                     <div class="row row-unpadded">
                         <div class="col col-90">
-                            <p class="description">{{ item.shortDescription }}</p>
+                            <p class="description">{{ place.shortDescription }}</p>
                         </div>
                         <div class="col col-10">
                             <span class="distance">
-                                {{ item.distance }}km
+                                2,1 km
                             </span>
                         </div>
                     </div>

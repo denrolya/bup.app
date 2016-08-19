@@ -14,7 +14,7 @@
         <ion-slide-box show-pager="false" active-slide="vm.currentActiveTab" on-slide-changed="vm.tabHasChanged($index)">
             <ion-slide>
                 <ion-list class="bg-image-list">
-                    <ion-item class="bg-image-list-item" ui-sref="app.category.list({categorySlug: category.slug})" ng-repeat="category in vm.categories" style="background-image: url('{{ category.coverImage.uri }}');">
+                    <ion-item class="bg-image-list-item" ui-sref="app.places.list({categorySlug: category.slug})" ng-repeat="category in vm.categories" style="background-image: url('{{ category.coverImage.uri }}');">
                         <div class="description">
                             <span class="text-content">
                                 {{ category.name }}

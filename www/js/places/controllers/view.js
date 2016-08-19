@@ -3,17 +3,28 @@
 
     angular
         .module('app')
-        .controller('EntryViewController', EntryViewController);
+        .controller('ViewController', ViewController);
 
-    EntryViewController.$inject = ['$scope'];
-    function EntryViewController($scope) {
+    ViewController.$inject = ['$scope', '$stateParams', 'Place'];
+    function ViewController($scope, $stateParams, Place) {
         var vm = this;
 
+        vm.place = {};
+
+        vm.getPlace = getPlace;
         vm.initializeMap = initializeMap;
 
-        google.maps.event.addDomListener(window, 'load', function() {
-            vm.initializeMap()
-        });
+        vm.getPlace();
+
+        function getPlace() {
+            Place.get({categorySlug: $stateParams.categorySlug, placeSlug: $stateParams.placeSlug}, function(response) {
+                vm.place = response.place;
+
+                google.maps.event.addDomListener(window, 'load', function() {
+                    vm.initializeMap()
+                });
+            });
+        }
 
         function initializeMap() {
             var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
