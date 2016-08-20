@@ -5,8 +5,8 @@
         .module('app')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$stateParams', 'Place'];
-    function ListController($stateParams, Place) {
+    ListController.$inject = ['$stateParams', 'Category'];
+    function ListController($stateParams, Category) {
         var vm = this;
 
         vm.categorySlug = $stateParams.categorySlug;
@@ -17,7 +17,7 @@
         vm.getPlaces();
 
         function getPlaces() {
-            Place.get({categorySlug: $stateParams.categorySlug}, function(response) {
+            Category.getPlaces({categorySlug: $stateParams.categorySlug}, function(response) {
                 vm.places = response.places;
             });
         }

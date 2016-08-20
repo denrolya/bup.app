@@ -7,9 +7,6 @@
 
     Place.$inject = ['$resource'];
     function Place($resource) {
-        return $resource('http://bud.api/app_dev.php/api/categories/:categorySlug/places/:placeSlug', {
-            categorySlug: '@categorySlug',
-            placeSlug: '@placeSlug'
-        }, {});
+        return $resource('http://bud.api/app_dev.php/api/places/:placeSlug', {placeSlug: '@placeSlug'}, {});
     }
 })();

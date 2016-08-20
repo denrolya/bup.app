@@ -15,6 +15,7 @@
                                 files: [
                                     'js/places/assets/css/style.css',
                                     'js/places/resources/place.js',
+                                    'js/index/resources/category.js',
                                     'js/places/controllers/list.js',
                                     'js/places/controllers/view.js'
                                 ]
