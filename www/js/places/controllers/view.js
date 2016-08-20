@@ -13,11 +13,12 @@
 
         vm.getPlace = getPlace;
         vm.initializeMap = initializeMap;
+        vm.getNumber = getNumber;
 
         vm.getPlace();
 
         function getPlace() {
-            Place.get({categorySlug: $stateParams.categorySlug, placeSlug: $stateParams.placeSlug}, function(response) {
+            Place.get({placeSlug: $stateParams.placeSlug}, function(response) {
                 vm.place = response.place;
                 vm.place.coverImage = vm.place.images[Math.floor(Math.random()*vm.place.images.length)]
 
@@ -48,6 +49,10 @@
             });
 
             $scope.map = map;
+        }
+
+        function getNumber(num) {
+            return new Array(num);
         }
     }
 })();
