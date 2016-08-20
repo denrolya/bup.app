@@ -25,6 +25,7 @@
                 response.dateFrom = new Date(response.dateFrom);
                 response.dateTo = new Date(response.dateTo);
                 vm.event = response;
+                vm.event.coverImage = vm.event.images[Math.floor(Math.random()*vm.event.images.length)]
             });
         }
 

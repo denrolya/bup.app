@@ -4,7 +4,7 @@
     </ion-nav-title>
 
     <ion-content>
-        <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('img/pexels-photo-116025-large.jpeg');">
+        <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.event.coverImage.uri }}');">
             <div class="landing-hero-image-captions">
                 <span class="ehic-big">{{ vm.event.title }}</span>
                 <span class="ehic-small">{{ vm.event.location }}</span>
@@ -28,7 +28,11 @@
             <div ng-bind-html="vm.event.descriptionBlock1"></div>
         </div>
 
-        <div class="landing-hero-image" style="background-image: url('{{ vm.event.images[1].uri }}');"></div>
+        <ion-slide-box does-continue="true" show-pager="false" ng-if="vm.event.images">
+            <ion-slide ng-repeat="image in vm.event.images">
+                <div class="landing-hero-image" style="background-image: url('{{ image.uri }}');"></div>
+            </ion-slide>
+        </ion-slide-box>
 
         <div class="landing-paragraphs">
             <div ng-bind-html="vm.event.descriptionBlock2"></div>
