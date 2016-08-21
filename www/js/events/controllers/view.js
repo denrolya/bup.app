@@ -22,9 +22,10 @@
 
         function getEvent() {
             Event.get({eventSlug: $stateParams.eventSlug}, function(response) {
-                response.dateFrom = new Date(response.dateFrom);
-                response.dateTo = new Date(response.dateTo);
-                vm.event = response;
+                vm.event = response.event;
+
+                vm.event.dateFrom = new Date(vm.event.dateFrom);
+                vm.event.dateTo = new Date(vm.event.dateTo);
                 vm.event.coverImage = vm.event.images[Math.floor(Math.random()*vm.event.images.length)]
             });
         }

@@ -1,6 +1,5 @@
-@font-face {
-    font-family: Fabrica;
-    src: url("../fonts/Fabrica.otf") format("opentype");
+body {
+    font-family: Cabin;
 }
 
 /*====================
@@ -15,7 +14,7 @@
 
 .bg-image-list-item {
     color: white;
-    padding: 65px 50px;
+    padding: 55px 50px;
     background-size: 100%;
     background-repeat: no-repeat
 }
@@ -26,7 +25,8 @@
 
 .bg-image-list-item .text-content {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 25px;
+    letter-spacing: 0.1em;
     display: block;
 }
 
@@ -36,7 +36,7 @@
 
 .bg-image-list-item.bg-list-item-with-description .text-content p.description {
     margin-top: 10px;
-    width: 80%;
+    /*width: 80%;*/
     color: #fff;
     font-size: 13px;
     white-space: normal;

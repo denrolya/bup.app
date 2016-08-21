@@ -3,8 +3,8 @@
         <strong style="font-size: 24px;">BP</strong>
     </ion-nav-title>
 
-    <ion-header-bar class="bar-subheader" align-title="left" style="background: url('img/city-cars-traffic-lights-large.jpeg');">
-        <span class="header-text header-text-image">
+    <ion-header-bar class="bar-subheader" align-title="left">
+        <span class="header-text">
             {{ vm.places[0].category.name }}
         </span>
     </ion-header-bar>
@@ -15,10 +15,10 @@
                 <span class="text-content">
                     <span class="header">{{ place.name }}</span>
                     <div class="row row-unpadded">
-                        <div class="col col-90">
+                        <div class="col col-80">
                             <p class="description">{{ place.shortDescription }}</p>
                         </div>
-                        <div class="col col-10">
+                        <div class="col col-20">
                             <span class="distance">
                                 2,1 km
                             </span>

@@ -17,14 +17,14 @@
 
         vm.getPlace();
 
+        google.maps.event.addDomListener(window, 'load', function() {
+            vm.initializeMap()
+        });
+
         function getPlace() {
             Place.get({placeSlug: $stateParams.placeSlug}, function(response) {
                 vm.place = response.place;
                 vm.place.coverImage = vm.place.images[Math.floor(Math.random()*vm.place.images.length)]
-
-                google.maps.event.addDomListener(window, 'load', function() {
-                    vm.initializeMap()
-                });
             });
         }
 
