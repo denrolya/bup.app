@@ -5,8 +5,8 @@
         .module('app')
         .factory('Place', Place);
 
-    Place.$inject = ['$resource'];
-    function Place($resource) {
-        return $resource('http://bud.api/app_dev.php/api/places/:placeSlug', {placeSlug: '@placeSlug'}, {});
+    Place.$inject = ['$resource', 'apiUrl'];
+    function Place($resource, apiUrl) {
+        return $resource(apiUrl + '/places/:placeSlug', {placeSlug: '@placeSlug'}, {});
     }
 })();

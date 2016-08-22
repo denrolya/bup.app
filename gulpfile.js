@@ -6,6 +6,31 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var replace = require('gulp-replace-task');
+var args    = require('yargs').argv;
+var fs      = require('fs');
+var debug   = require('gulp-debug');
+
+gulp.task('replace', function () {
+  // Get the environment from the command line
+  var env = args.env || 'local';
+
+  // Read the settings from the right file
+  var filename = env + '.json';
+  var settings = JSON.parse(fs.readFileSync('./config/' + filename, 'utf8'));
+
+// Replace each placeholder with the correct value for the variable.
+  gulp.src('www/js/app-constants.js')
+      .pipe(replace({
+        patterns: [
+          {
+            match: 'apiUrl',
+            replacement: settings.apiUrl
+          }
+        ]
+      }))
+      .pipe(gulp.dest('www/build/js'));
+});
 
 var paths = {
   sass: ['./scss/**/*.scss']

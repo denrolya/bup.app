@@ -5,12 +5,12 @@
         .module('app')
         .factory('Category', Category);
 
-    Category.$inject = ['$resource'];
-    function Category($resource) {
-        return $resource('http://bud.api/app_dev.php/api/secure/categories/:categorySlug', {categorySlug: '@categorySlug'}, {
+    Category.$inject = ['$resource', 'apiUrl'];
+    function Category($resource, apiUrl) {
+        return $resource(apiUrl + '/categories/:categorySlug', {categorySlug: '@categorySlug'}, {
             getPlaces: {
                 method: 'GET',
-                url: 'http://bud.api/app_dev.php/api/categories/:categorySlug/places'
+                url: apiUrl+ '/categories/:categorySlug/places'
             }
         });
     }
