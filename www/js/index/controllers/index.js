@@ -5,8 +5,8 @@
         .module('app')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$stateParams', 'Category', 'Event'];
-    function IndexController($stateParams, Category, Event) {
+    IndexController.$inject = ['$stateParams', '$document', 'Category', 'Event'];
+    function IndexController($stateParams, $document, Category, Event) {
         var vm = this;
 
         vm.currentActiveTab = Number($stateParams.tabIndex || 0);
@@ -18,6 +18,14 @@
         vm.getEvents = getEvents;
 
         vm.getData();
+
+        $document.on('scroll', function() {
+            console.log('Document scrolled to ', $document.scrollLeft(), $document.scrollTop());
+        });
+        var container = angular.element(document.getElementsByClassName('cot')[0]);
+        container.on('scroll', function() {
+            console.log('Container scrolled to ', container.scrollLeft(), container.scrollTop());
+        });
 
         function getData() {
             switch(vm.currentActiveTab) {

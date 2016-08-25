@@ -10,7 +10,7 @@
         return $resource(apiUrl + '/events/:eventSlug', {eventSlug: '@eventSlug'}, {
             getGroupedFromToday: {
                 method: 'GET',
-                url: 'http://139.59.214.126/app_dev.php/api/events/grouped',
+                url: apiUrl + '/events/grouped',
                 isArray: false
             }
         });

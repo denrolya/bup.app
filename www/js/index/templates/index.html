@@ -24,9 +24,9 @@
                 </ion-list>
             </ion-slide>
             <ion-slide>
-                <div class="">
+                <div class="cot">
                     <span class="calendar-list-item" ng-repeat="(date,events) in vm.events">
-                        {{ date }}
+                        <span id="date-{{ date }}">{{ date }}</span>
                         <ion-list class="bg-image-list">
                             <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.events.view({eventSlug: event.slug})" ng-repeat="event in events" style="background-image: url('{{ event.images[0].uri }}');">
                                 <span class="text-content">

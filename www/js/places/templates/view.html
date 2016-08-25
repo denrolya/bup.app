@@ -33,7 +33,7 @@
 
         <ion-slide-box does-continue="true" show-pager="false" ng-if="vm.place.images">
             <ion-slide ng-repeat="image in vm.place.images">
-                <div class="landing-hero-image" style="background-image: url('{{ image.uri }}');"></div>
+                <div class="landing-carousel-image" style="background-image: url('{{ image.uri }}');"></div>
             </ion-slide>
         </ion-slide-box>
 
@@ -46,7 +46,7 @@
                 <span>Get Directions</span>
             </div>
         </div>
-        <div class="landing-hero-image">
+        <div class="landing-map">
             <div id="map" data-tap-disabled="true"></div>
         </div>
 

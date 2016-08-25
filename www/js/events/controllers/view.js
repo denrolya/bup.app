@@ -36,13 +36,28 @@
             var mapOptions = {
                 center: myLatlng,
                 zoom: 16,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                zoomControl: true,
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                mapTypeIds: ['roadmap', 'terrain'],
+                mapTypeControl: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [{
+                    featureType: 'all',
+                    "stylers": [
+                        { "invert_lightness": true },
+                        { "gamma": 0.62 },
+                        { "saturation": -9 },
+                        { "lightness": 26 },
+                        { "hue": "#00ffcc" }
+                    ]
+                }]
             };
 
             var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
             navigator.geolocation.getCurrentPosition(function(pos) {
                 map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+
                 var myLocation = new google.maps.Marker({
                     position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
                     map: map,
