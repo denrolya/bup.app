@@ -42,10 +42,9 @@
                 position: place.location
             });
 
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.address);
-                infowindow.open(map, this);
-            });
+            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.address);
+            infowindow.open(map, marker);
+            map.setCenter(marker.getPosition());
         }
 
         function getNumber(num) {
