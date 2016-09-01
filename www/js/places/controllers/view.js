@@ -22,16 +22,16 @@
                 vm.place = response.place;
                 vm.place.coverImage = vm.place.images[Math.floor(Math.random()*vm.place.images.length)]
                 vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
-                vm.initializeMap();
+                vm.initializeMap(vm.place);
             });
         }
 
-        function initializeMap() {
+        function initializeMap(place) {
             var infowindow = new google.maps.InfoWindow(),
                 mapElement = document.getElementById('map');
 
             var map = new google.maps.Map(mapElement, {
-                center: vm.place.location,
+                center: place.location,
                 disableDefaultUI: true,
                 zoom: 17
             });
@@ -39,11 +39,11 @@
             $scope.map = map;
             var marker = new google.maps.Marker({
                 map: map,
-                position: vm.place.location
+                position: place.location
             });
 
             google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(vm.place.name);
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.address);
                 infowindow.open(map, this);
             });
         }
