@@ -17,38 +17,35 @@
 
         vm.getPlace();
 
-        google.maps.event.addDomListener(window, 'load', function() {
-            vm.initializeMap()
-        });
-
         function getPlace() {
             Place.get({placeSlug: $stateParams.placeSlug}, function(response) {
                 vm.place = response.place;
                 vm.place.coverImage = vm.place.images[Math.floor(Math.random()*vm.place.images.length)]
+                vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
+                vm.initializeMap();
             });
         }
 
         function initializeMap() {
-            var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+            var infowindow = new google.maps.InfoWindow(),
+                mapElement = document.getElementById('map');
 
-            var mapOptions = {
-                center: myLatlng,
-                zoom: 16,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-            navigator.geolocation.getCurrentPosition(function(pos) {
-                map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-                var myLocation = new google.maps.Marker({
-                    position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                    map: map,
-                    title: "My Location"
-                });
+            var map = new google.maps.Map(mapElement, {
+                center: vm.place.location,
+                disableDefaultUI: true,
+                zoom: 17
             });
 
             $scope.map = map;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: vm.place.location
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(vm.place.name);
+                infowindow.open(map, this);
+            });
         }
 
         function getNumber(num) {

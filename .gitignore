@@ -5,6 +5,7 @@
 /.idea
 
 # Builds and keys
+/apks/
 /*.apk
 /*.keystore
 /www/build
