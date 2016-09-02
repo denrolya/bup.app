@@ -5,8 +5,8 @@
         .module('app')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$stateParams', 'Category'];
-    function ListController($stateParams, Category) {
+    ListController.$inject = ['$scope', '$stateParams', 'Category'];
+    function ListController($scope, $stateParams, Category) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -32,6 +32,7 @@
                                 travelMode: 'WALKING',
                             }, function(response, status) {
                                 vm.places[key].distance = response.rows[0].elements[0].distance.text;
+                                $scope.$apply();
                             });
                         }, function() {
                             handleLocationError(true, infoWindow, map.getCenter());
