@@ -15,7 +15,6 @@
         vm.getPlace = getPlace;
         vm.initializeMap = initializeMap;
         vm.getNumber = getNumber;
-        vm.goBack = _goBack;
 
         vm.getPlace();
 
