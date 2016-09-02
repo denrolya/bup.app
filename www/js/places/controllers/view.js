@@ -8,6 +8,7 @@
     ViewController.$inject = ['$scope', '$stateParams', 'Place'];
     function ViewController($scope, $stateParams, Place) {
         var vm = this;
+        var distanceMatrixService = new google.maps.DistanceMatrixService();
 
         vm.categorySlug = $stateParams.categorySlug;
         vm.place = {};
@@ -24,6 +25,27 @@
                 vm.place.coverImage = vm.place.images[Math.floor(Math.random()*vm.place.images.length)]
                 vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
                 vm.initializeMap(vm.place);
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                            placeLocation = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
+
+                        distanceMatrixService.getDistanceMatrix({
+                            origins: [currentLocation],
+                            destinations: [placeLocation],
+                            travelMode: 'WALKING',
+                        }, function(response, status) {
+                            vm.place.distance = response.rows[0].elements[0].distance.text;
+                            $scope.$apply();
+                        });
+                    }, function() {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
             });
         }
 
