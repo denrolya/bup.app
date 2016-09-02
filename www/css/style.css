@@ -55,7 +55,7 @@
 =  Event or Place Landing =
 =========================*/
 .landing-hero-image {
-    height: 150px;
+    height: 194px;
 }
 
 .landing-map {
@@ -76,10 +76,21 @@
     position: relative;
 }
 
+.landing-hero-image-back-button {
+    position: absolute;
+    top: 10%;
+    left: 50px;
+}
+
+.landing-hero-image-back-button a {
+    color: white;
+    font-size: 20px;
+}
+
 .landing-hero-image-captions {
     position: absolute;
     color: white;
-    top: 25%;
+    bottom: 15%;
 }
 
 .landing-hero-image-captions > span {

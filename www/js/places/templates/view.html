@@ -1,10 +1,11 @@
-<ion-view>
-    <ion-nav-title>
-        <strong style="font-size: 24px;">BP</strong>
-    </ion-nav-title>
-
+<ion-view hide-nav-bar="true">
     <ion-content>
         <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.place.coverImage.uri }}');">
+            <div class="landing-hero-image-back-button">
+                <a href="" ng-click="goBack()">
+                    <span class="ion-android-arrow-back"></span> Back
+                </a>
+            </div>
             <div class="landing-hero-image-captions">
                 <span class="ehic-big">{{ vm.place.name }}</span>
                 <span class="ehic-small">{{ vm.place.address }}</span>
@@ -15,14 +16,14 @@
         <div class="landing-header landing-rates">
             <div class="row">
                 <div class="col">Our Rating:</div>
-                <div class="col col-67">
-                    <span class="ion-social-usd" ng-repeat="i in vm.getNumber(vm.place.rating) track by $index"></span>
+                <div class="col col-67 price-indicator">
+                    <span class="ion-star" ng-repeat="i in vm.getNumber(vm.place.rating) track by $index"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">Price Range:</div>
-                <div class="col col-67">
-                    <span class="ion-star" ng-repeat="i in vm.getNumber(vm.place.priceRange) track by $index"></span>
+                <div class="col col-67 rating-indicator">
+                    <span class="ion-social-usd" ng-repeat="i in vm.getNumber(vm.place.priceRange) track by $index"></span>
                 </div>
             </div>
         </div>
@@ -57,15 +58,15 @@
         </div>
 
         <div class="landing-credentials">
-            <div class="row">
+            <div class="row" ng-if="vm.place.website">
                 <div class="col header">Website:</div>
                 <div class="col col-67"><a href="#">{{ vm.place.website }}</a></div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="vm.place.phonenumber">
                 <div class="col header">Telephone:</div>
-                <div class="col col-67"><a href="tel:0036707372913">{{ vm.place.phonenumber }}</a></div>
+                <div class="col col-67"><a ng-href="tel:{{ vm.place.phonenumber }}">{{ vm.place.phonenumber }}</a></div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="vm.place.opened">
                 <div class="col header">Open:</div>
                 <div class="col col-67">{{ vm.place.opened }}</div>
             </div>

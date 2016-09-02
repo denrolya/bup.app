@@ -9,11 +9,13 @@
     function ViewController($scope, $stateParams, Place) {
         var vm = this;
 
+        vm.categorySlug = $stateParams.categorySlug;
         vm.place = {};
 
         vm.getPlace = getPlace;
         vm.initializeMap = initializeMap;
         vm.getNumber = getNumber;
+        vm.goBack = _goBack;
 
         vm.getPlace();
 

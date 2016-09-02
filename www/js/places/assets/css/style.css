@@ -11,3 +11,7 @@
     position: absolute;
     left: 25px;
 }
+
+.rating-indicator, .price-indicator {
+    letter-spacing: .2em;
+}

@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['app-constants', 'ionic', 'app.controllers', 'ngResource', 'oc.lazyLoad', 'ngLodash', 'duScroll'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $rootScope, $ionicHistory) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -19,6 +19,10 @@ angular.module('app', ['app-constants', 'ionic', 'app.controllers', 'ngResource'
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            $rootScope.goBack = function () {
+                $ionicHistory.goBack();
+            };
         });
     })
 
