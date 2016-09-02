@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true">
     <ion-content>
         <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.place.coverImage.uri }}');">
-            <div class="landing-hero-image-back-button">
+            <div class="landing-hero-image-back-button" ng-if="hasBackView()">
                 <a href="" ng-click="goBack()">
                     <span class="ion-android-arrow-back"></span> Back
                 </a>

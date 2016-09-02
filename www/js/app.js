@@ -20,6 +20,10 @@ angular.module('app', ['app-constants', 'ionic', 'app.controllers', 'ngResource'
                 StatusBar.styleDefault();
             }
 
+            $rootScope.hasBackView = function() {
+                return $ionicHistory.backView() !== null;
+            }
+
             $rootScope.goBack = function () {
                 $ionicHistory.goBack();
             };
