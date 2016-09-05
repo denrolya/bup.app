@@ -68,7 +68,16 @@
             </div>
             <div class="row" ng-if="vm.place.opened">
                 <div class="col header">Open:</div>
-                <div class="col col-67">{{ vm.place.opened }}</div>
+                <div class="col col-67">
+                    Mon: {{ vm.place.opened.Mon }} <br>
+                    Tue: {{ vm.place.opened.Tue }} <br>
+                    Wed: {{ vm.place.opened.Wed }} <br>
+                    Wed: {{ vm.place.opened.Wed }} <br>
+                    Thu: {{ vm.place.opened.Thu }} <br>
+                    Fri: {{ vm.place.opened.Fri }} <br>
+                    Sat: {{ vm.place.opened.Sat }} <br>
+                    Sun: {{ vm.place.opened.Sun }} <br>
+                </div>
             </div>
         </div>
     </ion-content>
