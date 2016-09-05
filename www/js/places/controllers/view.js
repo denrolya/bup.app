@@ -5,8 +5,8 @@
         .module('app')
         .controller('ViewController', ViewController);
 
-    ViewController.$inject = ['$scope', '$stateParams', 'Place'];
-    function ViewController($scope, $stateParams, Place) {
+    ViewController.$inject = ['$scope', '$stateParams', '$cordovaGeolocation', 'Place'];
+    function ViewController($scope, $stateParams, $cordovaGeolocation, Place) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -27,21 +27,23 @@
                 vm.initializeMap(vm.place);
 
                 if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                            placeLocation = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
+                    $cordovaGeolocation
+                        .getCurrentPosition()
+                        .then(function(position) {
+                            var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                                placeLocation = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
 
-                        distanceMatrixService.getDistanceMatrix({
-                            origins: [currentLocation],
-                            destinations: [placeLocation],
-                            travelMode: 'WALKING',
-                        }, function(response, status) {
-                            vm.place.distance = response.rows[0].elements[0].distance.text;
-                            $scope.$apply();
+                            distanceMatrixService.getDistanceMatrix({
+                                origins: [currentLocation],
+                                destinations: [placeLocation],
+                                travelMode: 'WALKING',
+                            }, function(response, status) {
+                                vm.place.distance = response.rows[0].elements[0].distance.text;
+                                $scope.$apply();
+                            });
+                        }, function() {
+                            handleLocationError(true, infoWindow, map.getCenter());
                         });
-                    }, function() {
-                        handleLocationError(true, infoWindow, map.getCenter());
-                    });
                 } else {
                     // Browser doesn't support Geolocation
                     handleLocationError(false, infoWindow, map.getCenter());

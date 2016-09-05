@@ -11,6 +11,10 @@
     </ion-header-bar>
 
     <ion-content class="has-subheader">
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="vm.getPlaces()">
+        </ion-refresher>
         <ion-list class="bg-image-list" ng-if="vm.places.length > 0">
             <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.places.view({categorySlug: vm.categorySlug, placeSlug: place.slug})" ng-repeat="place in vm.places" style="background-image: url('{{ place.images[0].uri }}');">
                 <span class="text-content">

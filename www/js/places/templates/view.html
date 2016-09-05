@@ -60,10 +60,10 @@
         <div class="landing-credentials">
             <div class="row" ng-if="vm.place.website">
                 <div class="col header">Website:</div>
-                <div class="col col-67"><a href="#">{{ vm.place.website }}</a></div>
+                <div class="col col-67"><a ng-href="{{ vm.place.website }}">{{ vm.place.website | limitTo : 50 }}</a></div>
             </div>
             <div class="row" ng-if="vm.place.phonenumber">
-                <div class="col header">Telephone:</div>
+                <div class="col header">Phone:</div>
                 <div class="col col-67"><a ng-href="tel:{{ vm.place.phonenumber }}">{{ vm.place.phonenumber }}</a></div>
             </div>
             <div class="row" ng-if="vm.place.opened">

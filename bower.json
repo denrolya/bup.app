@@ -9,6 +9,7 @@
     "oclazyload": "^1.0.9",
     "angular-lodash": "^0.1.2",
     "ng-lodash": "^0.5.0",
-    "ngSanitize": "^0.0.2"
+    "ngSanitize": "^0.0.2",
+    "ngCordova": "^0.1.27-alpha"
   }
 }
