@@ -5,8 +5,8 @@
         .module('app')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$scope', '$stateParams', '$cordovaGeolocation', 'Category'];
-    function ListController($scope, $stateParams, $cordovaGeolocation, Category) {
+    ListController.$inject = ['$scope', '$ionicLoading', '$stateParams', '$cordovaGeolocation', 'Category'];
+    function ListController($scope, $ionicLoading, $stateParams, $cordovaGeolocation, Category) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -17,32 +17,63 @@
 
         vm.getPlaces();
 
-        function getPlaces() {
-            Category.getPlaces({categorySlug: $stateParams.categorySlug}, function(response) {
-                vm.places = response.places;
-                vm.places.forEach(function(place,key) {
-                    if (navigator.geolocation) {
-                        $cordovaGeolocation
-                            .getCurrentPosition()
-                            .then(function(position) {
-                                var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                                    placeLocation = new google.maps.LatLng(place.latitude, place.longitude);
+        $scope.$on('distanceCalculated', function(e, args) {
+            vm.places = args;
+        });
 
-                                distanceMatrixService.getDistanceMatrix({
-                                    origins: [currentLocation],
-                                    destinations: [placeLocation],
-                                    travelMode: 'WALKING',
-                                }, function(response, status) {
-                                    vm.places[key].distance = response.rows[0].elements[0].distance.text;
-                                    $scope.$apply();
-                                });
-                            });
-                    } else {
-                        // Browser doesn't support Geolocation
-                        handleLocationError(false, infoWindow, map.getCenter());
-                    }
+        function getPlaces() {
+            $ionicLoading.show({template: 'Loading nearest places...'});
+
+            if (navigator.geolocation) {
+                $cordovaGeolocation
+                    .getCurrentPosition()
+                    .then(function (position) {
+                        var params = {
+                            categorySlug: $stateParams.categorySlug,
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        };
+
+                        Category.getPlaces(params, function (response) {
+                            if (response.places.length > 0) {
+                                calculateDistancesToPlaces(position, response.places);
+                            }
+                            $scope.$broadcast('scroll.refreshComplete');
+                            $ionicLoading.hide();
+                        }, function(error) {
+                            $ionicLoading.hide();
+                        });
+                    }, function(error) {
+                        $ionicLoading.hide();
+                    });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function calculateDistancesToPlaces(position, places) {
+            var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                destinations = [];
+
+            places.forEach(function (place, key) {
+                destinations.push(new google.maps.LatLng(place.latitude, place.longitude));
+            });
+
+            distanceMatrixService.getDistanceMatrix({
+                origins: [currentLocation],
+                destinations: destinations,
+                travelMode: 'WALKING',
+            }, function (response, status) {
+                response.rows[0].elements.forEach(function(value, key) {
+                    places[key].distance = value.distance.text;
+                    places[key].distanceValue = value.distance.value;
                 });
-                $scope.$broadcast('scroll.refreshComplete');
+                places.sort(function(a,b) {
+                    return a.distanceValue > b.distanceValue;
+                });
+
+                $scope.$broadcast('distanceCalculated', places);
             });
         }
 
