@@ -3,14 +3,14 @@
         <strong style="font-size: 24px;">BP</strong>
     </ion-nav-title>
 
-    <ion-header-bar class="bar-subheader" align-title="left">
+    <ion-header-bar class="bar-subheader" align-title="left" no-tap-scroll="true">
         <span class="header-text" ng-if="vm.places.length > 0">
             {{ vm.places[0].category.name }}
         </span>
         <span class="header-text" ng-if="vm.places.length === 0">Whoops</span>
     </ion-header-bar>
 
-    <ion-content class="has-subheader">
+    <ion-content>
         <ion-refresher
                 pulling-text="Pull to refresh..."
                 on-refresh="vm.getPlaces()">

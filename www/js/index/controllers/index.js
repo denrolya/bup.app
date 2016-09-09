@@ -5,8 +5,8 @@
         .module('app')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$stateParams', '$document', 'Category', 'Event'];
-    function IndexController($stateParams, $document, Category, Event) {
+    IndexController.$inject = ['$scope', '$stateParams', '$document', 'Category', 'Event'];
+    function IndexController($scope, $stateParams, $document, Category, Event) {
         var vm = this;
 
         vm.currentActiveTab = Number($stateParams.tabIndex || 0);
@@ -46,12 +46,14 @@
         function getEvents() {
             Event.getGroupedFromToday(function(response) {
                 vm.events = response.events;
+                $scope.$broadcast('scroll.refreshComplete');
             });
         }
 
         function getCategories() {
             Category.get(function(response) {
                 vm.categories = response.categories;
+                $scope.$broadcast('scroll.refreshComplete');
             });
         }
     }

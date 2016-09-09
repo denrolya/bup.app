@@ -31,7 +31,7 @@
     font-size: 25px;
     white-space: normal;
     line-height: 1em;
-    font-weight: 100;
+    font-weight: 900;
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content p.description {
@@ -39,9 +39,9 @@
     color: #fff;
     white-space: normal;
     font-size: 13px;
-    font-family: 'Droid Sans';
-    font-weight: 300;
+    font-family: 'Raleway';
     line-height: 1.5em;
+    letter-spacing: .2em;
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content span.distance {

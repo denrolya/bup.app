@@ -5,8 +5,8 @@
         .module('app')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$scope', '$ionicLoading', '$stateParams', '$cordovaGeolocation', 'Category'];
-    function ListController($scope, $ionicLoading, $stateParams, $cordovaGeolocation, Category) {
+    ListController.$inject = ['$scope', '$ionicLoading', '$ionicPopup', '$stateParams', '$cordovaGeolocation', 'Category'];
+    function ListController($scope, $ionicLoading, $ionicPopup, $stateParams, $cordovaGeolocation, Category) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -19,36 +19,65 @@
 
         $scope.$on('distanceCalculated', function(e, args) {
             vm.places = args;
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
         });
 
         function getPlaces() {
             $ionicLoading.show({template: 'Loading nearest places...'});
 
-            if (navigator.geolocation) {
+            if (!ionic.Platform.is('browser')) {
+                window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
+                        if (enabled) { places(true) }
+                        else {
+                            $ionicLoading.hide();
+
+                            var confirmPopup = $ionicPopup.confirm({
+                                title: 'Please turn location settings on.',
+                                template: 'By turning location service on your device on - you maximize pleasure of using it!'
+                            });
+
+                            confirmPopup.then(function(res) {
+                                if(res) {
+                                    cordova.plugins.diagnostic.switchToLocationSettings();
+                                } else {
+                                    places(false)
+                                }
+                            });
+                        }
+                    }, function ec(error) {
+                        $ionicPopup.alert({
+                            title: 'Error!',
+                            template: 'Error happened while checking location service'
+                        });
+                    });
+            } else {
+                places();
+            }
+        }
+
+        function places(sortByDistance) {
+            if (sortByDistance) {
                 $cordovaGeolocation
                     .getCurrentPosition()
-                    .then(function (position) {
+                    .then(function sc(position) {
                         var params = {
+                            closest: true,
                             categorySlug: $stateParams.categorySlug,
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude
+                            latitude: position.coords.latitude, longitude: position.coords.longitude
                         };
 
-                        Category.getPlaces(params, function (response) {
+                        Category.getPlaces(params, function sc(response) {
                             if (response.places.length > 0) {
                                 calculateDistancesToPlaces(position, response.places);
                             }
-                            $scope.$broadcast('scroll.refreshComplete');
-                            $ionicLoading.hide();
-                        }, function(error) {
-                            $ionicLoading.hide();
-                        });
-                    }, function(error) {
-                        $ionicLoading.hide();
-                    });
+                        }, function ec(error) { $ionicLoading.hide() });
+
+                    }, function ec(error) { $ionicLoading.hide() });
             } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
+                Category.getPlaces({categorySlug: $stateParams.categorySlug}, function sc(response) {
+                    $scope.$broadcast('distanceCalculated', response.places);
+                }, function ec(error) { $ionicLoading.hide() });
             }
         }
 
@@ -75,13 +104,6 @@
 
                 $scope.$broadcast('distanceCalculated', places);
             });
-        }
-
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
         }
     }
 })();

@@ -11,6 +11,10 @@
     </ion-header-bar>
 
     <ion-content class="has-subheader">
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="vm.getData()">
+        </ion-refresher>
         <ion-slide-box show-pager="false" active-slide="vm.currentActiveTab" on-slide-changed="vm.tabHasChanged($index)">
             <ion-slide>
                 <ion-list class="bg-image-list">
