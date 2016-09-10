@@ -30,19 +30,15 @@
                 window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
                         if (enabled) { places(true) }
                         else {
-                            $ionicLoading.hide();
-
                             var confirmPopup = $ionicPopup.confirm({
                                 title: 'Please turn location settings on.',
                                 template: 'By turning location service on your device on - you maximize pleasure of using it!'
                             });
 
+                            // Check for location settings
                             confirmPopup.then(function(res) {
-                                if(res) {
-                                    cordova.plugins.diagnostic.switchToLocationSettings();
-                                } else {
-                                    places(false)
-                                }
+                                if(response) { cordova.plugins.diagnostic.switchToLocationSettings() }
+                                else { places(false) }
                             });
                         }
                     }, function ec(error) {
@@ -52,7 +48,7 @@
                         });
                     });
             } else {
-                places();
+                places(true);
             }
         }
 
@@ -69,7 +65,7 @@
 
                         Category.getPlaces(params, function sc(response) {
                             if (response.places.length > 0) {
-                                calculateDistancesToPlaces(position, response.places);
+                                $scope.$broadcast('distanceCalculated', response.places);
                             }
                         }, function ec(error) { $ionicLoading.hide() });
 
@@ -79,31 +75,6 @@
                     $scope.$broadcast('distanceCalculated', response.places);
                 }, function ec(error) { $ionicLoading.hide() });
             }
-        }
-
-        function calculateDistancesToPlaces(position, places) {
-            var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                destinations = [];
-
-            places.forEach(function (place, key) {
-                destinations.push(new google.maps.LatLng(place.latitude, place.longitude));
-            });
-
-            distanceMatrixService.getDistanceMatrix({
-                origins: [currentLocation],
-                destinations: destinations,
-                travelMode: 'WALKING',
-            }, function (response, status) {
-                response.rows[0].elements.forEach(function(value, key) {
-                    places[key].distance = value.distance.text;
-                    places[key].distanceValue = value.distance.value;
-                });
-                places.sort(function(a,b) {
-                    return a.distanceValue > b.distanceValue;
-                });
-
-                $scope.$broadcast('distanceCalculated', places);
-            });
         }
     }
 })();
