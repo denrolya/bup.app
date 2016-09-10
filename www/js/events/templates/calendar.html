@@ -1,0 +1,34 @@
+<ion-view hide-back-button="true">
+    <ion-nav-title>
+        <span style="font-size: 24px; font-family: 'Poiret One'; letter-spacing: .2em">BP</span>
+    </ion-nav-title>
+
+    <ion-content>
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="vm.getEvents()">
+        </ion-refresher>
+
+        <h1 ng-if="vm.events.length == 0" style="color: #525252; font-weight: 100; letter-spacing: .1em">No upcoming events</h1>
+        <div class="cot" ng-if="vm.events.length > 0">
+            <span class="calendar-list-item" ng-repeat="(date,events) in vm.events">
+                <span id="date-{{ date }}">{{ date }}</span>
+                <ion-list class="bg-image-list">
+                    <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.event.event-view({eventSlug: event.slug})" ng-repeat="event in vm.events" style="background-image: url('{{ event.images[0].uri }}');">
+                        <span class="text-content">
+                            <span class="header">{{ event.title }}</span>
+                            <div class="row row-unpadded">
+                                <div class="col col-90">
+                                    <p class="description">{{ event.shortDescription }}</p>
+                                </div>
+                                <div class="col col-10">
+                                    <span class="distance">2.3 km</span>
+                                </div>
+                            </div>
+                        </span>
+                    </ion-item>
+                </ion-list>
+            </span>
+        </div>
+    </ion-content>
+</ion-view>

@@ -3,10 +3,10 @@
 
     angular
         .module('app')
-        .controller('ViewController', ViewController);
+        .controller('PlaceViewController', PlaceViewController);
 
-    ViewController.$inject = ['$scope', '$stateParams', '$cordovaGeolocation', 'Place'];
-    function ViewController($scope, $stateParams, $cordovaGeolocation, Place) {
+    PlaceViewController.$inject = ['$scope', '$stateParams', '$cordovaGeolocation', 'Place'];
+    function PlaceViewController($scope, $stateParams, $cordovaGeolocation, Place) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 

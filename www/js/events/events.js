@@ -6,7 +6,7 @@
         .module('app')
         .config(function($stateProvider) {
             $stateProvider
-                .state('app.events', {
+                .state('app.event', {
                     url: '/events',
                     abstract: true,
                     resolve: {
@@ -15,6 +15,7 @@
                                 files: [
                                     'js/events/assets/css/style.css',
                                     'js/events/resources/event.js',
+                                    'js/events/controllers/calendar.js',
                                     'js/events/controllers/list.js',
                                     'js/events/controllers/view.js'
                                 ]
@@ -22,7 +23,17 @@
                         }
                     }
                 })
-                .state('app.events.list', {
+                .state('app.event.calendar', {
+                    url: '/calendar',
+                    views: {
+                        'menuContent@app': {
+                            templateUrl: 'js/events/templates/calendar.html',
+                            controller: 'CalendarController',
+                            controllerAs: 'vm',
+                        }
+                    }
+                })
+                .state('app.event.event-list', {
                     url: '/:day/:month/:year',
                     views: {
                         'menuContent@app': {
@@ -32,7 +43,7 @@
                         }
                     }
                 })
-                .state('app.events.view', {
+                .state('app.event.event-view', {
                     url: '/:eventSlug',
                     views: {
                         'menuContent@app': {

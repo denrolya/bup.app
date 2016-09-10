@@ -48,5 +48,5 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
                 controller: 'AppCtrl'
             });
 
-        $urlRouterProvider.otherwise('/app/index/');
+        $urlRouterProvider.otherwise('/app/categories/');
     });

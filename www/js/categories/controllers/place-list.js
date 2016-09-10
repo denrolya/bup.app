@@ -3,10 +3,10 @@
 
     angular
         .module('app')
-        .controller('ListController', ListController);
+        .controller('PlaceListController', PlaceListController);
 
-    ListController.$inject = ['$scope', '$ionicLoading', '$ionicPopup', '$stateParams', '$cordovaGeolocation', 'Category'];
-    function ListController($scope, $ionicLoading, $ionicPopup, $stateParams, $cordovaGeolocation, Category) {
+    PlaceListController.$inject = ['$scope', '$ionicLoading', '$ionicPopup', '$stateParams', '$cordovaGeolocation', 'Category'];
+    function PlaceListController($scope, $ionicLoading, $ionicPopup, $stateParams, $cordovaGeolocation, Category) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 

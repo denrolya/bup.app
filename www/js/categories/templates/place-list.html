@@ -1,6 +1,6 @@
 <ion-view hide-back-button="true">
     <ion-nav-title>
-        <strong style="font-size: 24px;">BP</strong>
+        <span style="font-size: 24px; font-family: 'Poiret One'; letter-spacing: .2em">BP</span>
     </ion-nav-title>
 
     <ion-header-bar class="bar-subheader" align-title="left" no-tap-scroll="true">
@@ -16,7 +16,7 @@
                 on-refresh="vm.getPlaces()">
         </ion-refresher>
         <ion-list class="bg-image-list" ng-show="vm.places.length > 0">
-            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.places.view({categorySlug: vm.categorySlug, placeSlug: place.slug})" ng-repeat="place in vm.places" style="background-image: url('{{ place.images[0].uri }}');">
+            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})" ng-repeat="place in vm.places" style="background-image: url('{{ place.images[0].uri }}');">
                 <span class="text-content">
                     <span class="header">{{ place.name }}</span>
                     <div class="row row-unpadded">

@@ -10,7 +10,7 @@
         return $resource(apiUrl + '/categories/:categorySlug', {categorySlug: '@categorySlug'}, {
             getPlaces: {
                 method: 'GET',
-                url: apiUrl+ '/categories/:categorySlug/places'
+                url: apiUrl + '/categories/:categorySlug/places'
             }
         });
     }
