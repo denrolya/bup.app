@@ -30,13 +30,14 @@
                 window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
                         if (enabled) { places(true) }
                         else {
+                            $ionicLoading.hide();
+
                             var confirmPopup = $ionicPopup.confirm({
                                 title: 'Please turn location settings on.',
                                 template: 'By turning location service on your device on - you maximize pleasure of using it!'
                             });
 
-                            // Check for location settings
-                            confirmPopup.then(function(res) {
+                            confirmPopup.then(function(response) {
                                 if(response) { cordova.plugins.diagnostic.switchToLocationSettings() }
                                 else { places(false) }
                             });

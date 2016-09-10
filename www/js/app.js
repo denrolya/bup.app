@@ -27,6 +27,11 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
             $rootScope.goBack = function () {
                 $ionicHistory.goBack();
             };
+
+            $rootScope.goToLink = function(link) {
+                window.open(link, '_system', 'location=yes');
+                return false;
+            }
         });
     })
 

@@ -5,13 +5,16 @@
         .module('app')
         .controller('CategoryListController', CategoryListController);
 
-    CategoryListController.$inject = ['$scope', 'Category'];
-    function CategoryListController($scope, Category) {
+    CategoryListController.$inject = ['$scope', '$state', 'Category'];
+    function CategoryListController($scope, $state, Category) {
         var vm = this;
 
         vm.categories = [];
 
         vm.getCategories = getCategories;
+        vm.onSwipeLeft = function() {
+            $state.go('app.event.calendar');
+        }
 
         vm.getCategories();
 

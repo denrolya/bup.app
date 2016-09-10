@@ -3,7 +3,7 @@
         <span style="font-size: 24px; font-family: 'Poiret One'; letter-spacing: .2em">BP</span>
     </ion-nav-title>
 
-    <ion-content>
+    <ion-content on-swipe-right="vm.onSwipeRight()">
         <ion-refresher
                 pulling-text="Pull to refresh..."
                 on-refresh="vm.getEvents()">

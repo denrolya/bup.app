@@ -1,5 +1,10 @@
 <ion-view hide-nav-bar="true">
     <ion-content>
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="vm.getPlace()">
+        </ion-refresher>
+
         <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.place.coverImage.uri }}');">
             <div class="landing-hero-image-back-button" ng-if="hasBackView()">
                 <a href="" ng-click="goBack()">
@@ -60,23 +65,22 @@
         <div class="landing-credentials">
             <div class="row" ng-if="vm.place.website">
                 <div class="col header">Website:</div>
-                <div class="col col-67"><a ng-href="{{ vm.place.website }}">{{ vm.place.website | limitTo : 50 }}</a></div>
+                <div class="col col-67"><a href="" ng-click="goToLink('{{ vm.place.website }}')">{{ vm.place.website | limitTo : 50 }}</a></div>
             </div>
             <div class="row" ng-if="vm.place.phonenumber">
                 <div class="col header">Phone:</div>
-                <div class="col col-67"><a ng-href="tel:{{ vm.place.phonenumber }}">{{ vm.place.phonenumber }}</a></div>
+                <div class="col col-67"><a href="" ng-click="goToLink('tel:{{ vm.place.phonenumber }}')">{{ vm.place.phonenumber }}</a></div>
             </div>
             <div class="row" ng-if="vm.place.opened">
                 <div class="col header">Open:</div>
                 <div class="col col-67">
-                    Mon: {{ vm.place.opened.Mon }} <br>
-                    Tue: {{ vm.place.opened.Tue }} <br>
-                    Wed: {{ vm.place.opened.Wed }} <br>
-                    Wed: {{ vm.place.opened.Wed }} <br>
-                    Thu: {{ vm.place.opened.Thu }} <br>
-                    Fri: {{ vm.place.opened.Fri }} <br>
-                    Sat: {{ vm.place.opened.Sat }} <br>
-                    Sun: {{ vm.place.opened.Sun }} <br>
+                    Mon: {{ vm.place.opened.Mon.from }} - {{ vm.place.opened.Mon.to }} <br>
+                    Tue: {{ vm.place.opened.Tue.from }} - {{ vm.place.opened.Tue.to }} <br>
+                    Wed: {{ vm.place.opened.Wed.from }} - {{ vm.place.opened.Wed.to }} <br>
+                    Thu: {{ vm.place.opened.Thu.from }} - {{ vm.place.opened.Thu.to }} <br>
+                    Fri: {{ vm.place.opened.Fri.from }} - {{ vm.place.opened.Fri.to }} <br>
+                    Sat: {{ vm.place.opened.Sat.from }} - {{ vm.place.opened.Sat.to }} <br>
+                    Sun: {{ vm.place.opened.Sun.from }} - {{ vm.place.opened.Sun.to }} <br>
                 </div>
             </div>
         </div>

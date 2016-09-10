@@ -5,8 +5,8 @@
         .module('app')
         .controller('CalendarController', CalendarController);
 
-    CalendarController.$inject = ['$scope', 'Event'];
-    function CalendarController($scope, Event) {
+    CalendarController.$inject = ['$scope', '$state', 'Event'];
+    function CalendarController($scope, $state, Event) {
         var vm = this;
 
         vm.events = [];
