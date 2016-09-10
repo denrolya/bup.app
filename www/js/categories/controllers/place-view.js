@@ -38,6 +38,7 @@
                                 destinations: [placeLocation],
                                 travelMode: 'WALKING',
                             }, function(response, status) {
+                                $scope.$broadcast('scroll.refreshComplete');
                                 vm.place.distance = response.rows[0].elements[0].distance.text;
                                 $scope.$apply();
                             });
