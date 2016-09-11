@@ -1,3 +1,11 @@
+.unsticky-header {
+    display: block;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    padding-left: 50px;
+}
+
 /*====================
 =    Listing pages   =
 ====================*/

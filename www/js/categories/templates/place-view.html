@@ -1,9 +1,6 @@
 <ion-view hide-nav-bar="true">
     <ion-content>
-        <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="vm.getPlace()">
-        </ion-refresher>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getPlace()"></ion-refresher>
 
         <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.place.coverImage.uri }}');">
             <div class="landing-hero-image-back-button" ng-if="hasBackView()">

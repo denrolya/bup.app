@@ -35,7 +35,7 @@
                 })
 
                 .state('app.category.place', {
-                    url: '/categories/:categorySlug/places',
+                    url: '/:categorySlug/places',
                     abstract: true
                 })
                 .state('app.category.place.place-list', {

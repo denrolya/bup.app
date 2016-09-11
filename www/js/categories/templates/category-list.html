@@ -4,10 +4,7 @@
     </ion-nav-title>
 
     <ion-content on-swipe-left="vm.onSwipeLeft()">
-        <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="vm.getCategories()">
-        </ion-refresher>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getCategories()"></ion-refresher>
 
         <ion-list class="bg-image-list">
             <ion-item class="bg-image-list-item" ui-sref="app.category.place.place-list({categorySlug: category.slug})" ng-repeat="category in vm.categories" style="background-image: url('{{ category.coverImage.uri }}');">
