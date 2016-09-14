@@ -10,7 +10,7 @@
             <ion-item class="bg-image-list-item" ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})" ng-repeat="category in vm.categories" style="background-image: url('{{ category.coverImage.uri }}');">
                 <div class="description">
                     <span class="text-content">
-                        {{ category.name }} [{{ category.places.length }}]
+                        {{ category.name }} [{{ category.placesCount }}]
                     </span>
                 </div>
             </ion-item>
