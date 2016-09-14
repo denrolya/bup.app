@@ -10,8 +10,13 @@
             {{ vm.category.name }}
         </div>
 
-        <ion-list class="bg-image-list" ng-show="vm.places.length > 0">
-            <ion-item class="bg-image-list-item bg-list-item-with-description" ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})" ng-repeat="place in vm.places" style="background-image: url('{{ place.images[0].uri }}');">
+        <div class="bg-image-list" ng-show="vm.places.length > 0">
+            <div collection-repeat="place in vm.places"
+                 item-height="130px" item-width="100%"
+                 ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})"
+                 class="bg-image-list-item bg-list-item-with-description">
+
+                <img ng-src="{{ place.images[0].uri }}">
                 <span class="text-content">
                     <span class="header">{{ place.name }}</span>
                     <div class="row row-unpadded">
@@ -25,8 +30,9 @@
                         </div>
                     </div>
                 </span>
-            </ion-item>
-        </ion-list>
+            </div>
+        </div>
+
         <div ng-show="vm.places.length === 0">
             <h4>No places were found in this category</h4>
             <h5>Wait a bit and we'll post something!</h5>
