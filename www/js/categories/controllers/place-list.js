@@ -10,7 +10,7 @@
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
-        vm.categorySlug = $stateParams.categorySlug;
+        vm.category = $stateParams.category;
         vm.places = [];
 
         vm.getPlaces = getPlaces;
@@ -60,7 +60,7 @@
                     .then(function sc(position) {
                         var params = {
                             closest: true,
-                            categorySlug: $stateParams.categorySlug,
+                            categorySlug: vm.category.slug,
                             latitude: position.coords.latitude, longitude: position.coords.longitude
                         };
 
@@ -72,7 +72,7 @@
 
                     }, function ec(error) { $ionicLoading.hide() });
             } else {
-                Category.getPlaces({categorySlug: $stateParams.categorySlug}, function sc(response) {
+                Category.getPlaces({categorySlug: vm.category.slug}, function sc(response) {
                     $scope.$broadcast('distanceCalculated', response.places);
                 }, function ec(error) { $ionicLoading.hide() });
             }

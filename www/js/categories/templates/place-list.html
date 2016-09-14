@@ -3,15 +3,11 @@
         <span style="font-size: 24px; font-family: 'Poiret One'; letter-spacing: .2em">BP</span>
     </ion-nav-title>
 
-    <ion-header-bar class="bar-subheader" align-title="left" ng-if="vm.places.length === 0">
-        <span class="header-text">Whoops</span>
-    </ion-header-bar>
-
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getPlaces()"></ion-refresher>
 
-        <div class="unsticky-header" ng-if="vm.places.length > 0">
-            {{ vm.places[0].category.name }}
+        <div class="unsticky-header">
+            {{ vm.category.name }}
         </div>
 
         <ion-list class="bg-image-list" ng-show="vm.places.length > 0">

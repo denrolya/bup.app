@@ -44,9 +44,10 @@
                         'menuContent@app': {
                             templateUrl: 'js/categories/templates/place-list.html',
                             controller: 'PlaceListController',
-                            controllerAs: 'vm',
+                            controllerAs: 'vm'
                         }
-                    }
+                    },
+                    params: { category: null }
                 })
                 .state('app.category.place.place-view', {
                     url: '/:placeSlug',
