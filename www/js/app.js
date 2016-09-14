@@ -38,6 +38,11 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
     .filter('chunk', function(lodash) {
         return lodash.memoize(lodash.chunk);
     })
+    .filter('if', function () {
+        return function(input, trueValue, falseValue) {
+            return input ? trueValue : falseValue;
+        };
+    })
 
     .config(function ($urlMatcherFactoryProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         $urlMatcherFactoryProvider.strictMode(false);
