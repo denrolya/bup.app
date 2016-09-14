@@ -7,18 +7,18 @@
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getCategories()"></ion-refresher>
 
         <div class="bg-image-list">
-            <div collection-repeat="category in vm.categories"
-                 item-height="130px" item-width="100%"
-                 ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})"
-                 class="bg-image-list-item">
+        <div collection-repeat="category in vm.categories"
+             item-height="130px" item-width="100%"
+             ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})"
+             class="bg-image-list-item">
 
-                <img ng-src="{{ category.coverImage.uri }}">
-                <div class="description">
-                    <span class="text-content">
-                        {{ category.name }} [{{ category.placesCount }}]
-                    </span>
-                </div>
+            <img ng-src="{{ category.coverImage.uri }}">
+            <div class="description">
+                <span class="text-content">
+                    {{ category.name }} [{{ category.placesCount }}]
+                </span>
             </div>
         </div>
+    </div>
     </ion-content>
 </ion-view>

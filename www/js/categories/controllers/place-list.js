@@ -55,9 +55,11 @@
 
         function places(sortByDistance) {
             if (sortByDistance) {
+                console.log('1');
                 $cordovaGeolocation
-                    .getCurrentPosition()
+                    .getCurrentPosition({maximumAge: 0})
                     .then(function sc(position) {
+                        console.log('2');
                         var params = {
                             closest: true,
                             categorySlug: vm.category.slug,
@@ -65,6 +67,7 @@
                         };
 
                         Category.getPlaces(params, function sc(response) {
+                            console.log('3');
                             if (response.places.length > 0) {
                                 $scope.$broadcast('distanceCalculated', response.places);
                             }

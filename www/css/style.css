@@ -35,7 +35,8 @@
     display: block;
     font-family: Poiret One;
     position: absolute;
-    top: 50px; left: 50px;
+    top: 0; left: 0;
+    padding: 30px 0 0 50px;
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content span.header {
