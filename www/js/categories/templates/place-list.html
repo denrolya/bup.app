@@ -1,33 +1,64 @@
 <ion-view hide-back-button="true">
-    <ion-nav-title>
-        <span style="font-size: 24px; font-family: 'Poiret One'; letter-spacing: .2em">BP</span>
-    </ion-nav-title>
-
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getPlaces()"></ion-refresher>
 
         <div class="unsticky-header">
-            {{ vm.category.name }}
+            <div class="search-box" ng-show="showSearch">
+                <input type="text" placeholder="Search" ng-model="vm.searchQuery" ng-change="vm.searchPlaces()">
+            </div>
+
+            <div ng-show="!showSearch">
+                <h1 class="category-name">{{ vm.category.name }}</h1>
+                <div>
+                    <div class="pull-left">
+                        <small class="category-listings-count">{{ vm.category.placesCount }} Listings</small>
+                    </div>
+                    <div class="pull-right">
+                        <div class="list">
+                            <label class="item item-input item-select">
+                                <div class="input-label"></div>
+                                <select>
+                                    <option>Blue</option>
+                                    <option selected>Green</option>
+                                    <option>Red</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
+
+        <style>
+            .bg-image-list-item .text-content > * {
+                text-shadow: 1px 2px 3px #000;
+            }
+            .bg-image-list-item h1 {
+                color: white;
+                font-weight: 900;
+                font-size: 34px;
+                margin-bottom: 5px;
+            }
+        </style>
 
         <div class="bg-image-list" ng-show="vm.places.length > 0">
             <div collection-repeat="place in vm.places"
-                 item-height="130px" item-width="100%"
+                 item-height="200px" item-width="100%"
                  ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})"
                  class="bg-image-list-item bg-list-item-with-description">
 
                 <img ng-src="{{ place.images[0].uri }}">
                 <span class="text-content">
-                    <span class="header">{{ place.name }}</span>
-                    <div class="row row-unpadded">
-                        <div class="col col-90">
-                            <p class="description">{{ place.shortDescription }}</p>
-                        </div>
-                        <div class="col col-10">
-                            <span class="distance">
-                                {{ place.distance }}
-                            </span>
-                        </div>
+                    <h1>{{ place.name }}</h1>
+                    <p class="description">{{ place.shortDescription }}</p>
+                    <div>
+                        <span class="pull-left distance">
+                            {{ place.distance }}
+                        </span>
+                        <span class="pull-right">
+                            <span class="ion-star" ng-repeat="i in getNumber(place.rating) track by $index"></span>
+                        </span>
                     </div>
                 </span>
             </div>

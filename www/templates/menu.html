@@ -4,10 +4,16 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-nav-back-button></ion-nav-back-button>
+
+      <ion-nav-title ng-show="!hasFilters">
+        <span style="font-size: 24px; letter-spacing: .2em">BP</span>
+      </ion-nav-title>
+
       <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-ios-search" menu-toggle="right"></button>
+        <button class="button button-icon button-clear ion-ios-search" menu-toggle="right" ng-click="toggleSearch()" ng-show="!showSearch"></button>
+        <button class="button button-icon button-clear ion-ios-close" menu-toggle="right" ng-click="toggleSearch()" ng-show="showSearch"></button>
       </ion-nav-buttons>
+
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>

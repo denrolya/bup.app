@@ -1,14 +1,65 @@
 .unsticky-header {
     display: block;
-    height: 60px;
+    height: 120px;
     font-size: 25px;
-    line-height: 60px;
-    padding-left: 50px;
+    padding: 30px;
+}
+
+.search-box input[type="text"] {
+    font-size: 22px;
+    font-weight: 600;
+    box-sizing: content-box;
+    padding: 10px 15px;
+    border-left: 1px solid #000088;
+}
+
+.search-box input[type="text"]::-webkit-input-placeholder {
+    color: #000088;
+}
+
+.search-box input[type="text"]:-moz-placeholder { /* Firefox 18- */
+    color: #000088;
+}
+
+.search-box input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+    color: #000088;
+}
+
+.search-box input[type="text"]:-ms-input-placeholder {
+    color: #000088;
 }
 
 /*====================
 =    Listing pages   =
 ====================*/
+
+/** CATEGORY LIST **/
+.category-list .list {
+    padding: 0 30px;
+}
+
+.category-list .item .item-content {
+    padding: 30px 0 15px 0;
+}
+
+.category-list .item {
+    border:none;
+    border-bottom: 2px solid #ccc;
+    min-height: 120px;
+}
+
+.category-list .item h1.category-name, .unsticky-header h1.category-name {
+    font-size: 34px;
+    font-weight: 900;
+    color: #493871;
+    margin-bottom: 0;
+}
+.category-list .category-listings-count, .unsticky-header .category-listings-count {
+    font-size: 18px;
+    color: #bab9b9;
+}
+/** END CATEGORY LIST **/
+
 .bg-image-list-item.item-complex a.item-content {
     display: inline;
     background: none;
@@ -20,7 +71,6 @@
     color: white;
     background-size: 100%;
     background-repeat: no-repeat;
-    max-height: 150px;
 }
 
 .bg-image-list-item img {
@@ -29,14 +79,14 @@
 }
 
 .bg-image-list-item .text-content {
+    height: 100%;
     font-weight: bold;
     font-size: 25px;
     letter-spacing: 0.1em;
     display: block;
-    font-family: Poiret One;
     position: absolute;
     top: 0; left: 0;
-    padding: 30px 0 0 50px;
+    padding: 30px;
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content span.header {
@@ -47,19 +97,16 @@
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content p.description {
-    margin-top: 5px;
     color: #fff;
     white-space: normal;
-    font-size: 13px;
-    font-family: 'Raleway';
+    font-size: 15px;
     line-height: 1.5em;
     letter-spacing: .2em;
+    margin-bottom: 30px;
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content span.distance {
-    font-size: 18px;
-    position: absolute;
-    bottom: 0;
+    font-size: 15px;
 }
 
 

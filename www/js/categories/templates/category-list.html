@@ -1,24 +1,21 @@
 <ion-view hide-back-button="true">
-    <ion-nav-title>
-        <span style="font-size: 24px; font-family: 'Poiret One'; letter-spacing: .2em">BP</span>
-    </ion-nav-title>
-
     <ion-content on-swipe-left="vm.onSwipeLeft()">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getCategories()"></ion-refresher>
 
-        <div class="bg-image-list">
-        <div collection-repeat="category in vm.categories"
-             item-height="130px" item-width="100%"
-             ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})"
-             class="bg-image-list-item">
-
-            <img ng-src="{{ category.coverImage.uri }}">
-            <div class="description">
-                <span class="text-content">
-                    {{ category.name }} [{{ category.placesCount }}]
-                </span>
-            </div>
+        <div class="search-box" ng-show="showSearch">
+            <label class="item item-input">
+                <input type="text" placeholder="Search">
+            </label>
         </div>
-    </div>
+
+        <ion-list class="category-list">
+            <ion-item
+                ng-repeat="category in vm.categories"
+                ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})">
+                <h1 class="category-name">{{ category.name }}</h1>
+                <small class="category-listings-count">{{ category.placesCount }} Listings</small>
+            </ion-item>
+        </ion-list>
+
     </ion-content>
 </ion-view>

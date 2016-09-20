@@ -5,15 +5,17 @@
         .module('app')
         .controller('PlaceListController', PlaceListController);
 
-    PlaceListController.$inject = ['$scope', '$ionicLoading', '$ionicPopup', '$stateParams', '$cordovaGeolocation', 'Category'];
-    function PlaceListController($scope, $ionicLoading, $ionicPopup, $stateParams, $cordovaGeolocation, Category) {
+    PlaceListController.$inject = ['$scope', '$ionicLoading', '$http', 'apiUrl', '$ionicPopup', '$stateParams', '$cordovaGeolocation', 'Category'];
+    function PlaceListController($scope, $ionicLoading, $http, apiUrl, $ionicPopup, $stateParams, $cordovaGeolocation, Category) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
+        vm.searchQuery = '';
         vm.category = $stateParams.category;
         vm.places = [];
 
         vm.getPlaces = getPlaces;
+        vm.searchPlaces = searchPlaces;
 
         vm.getPlaces();
 
@@ -55,11 +57,9 @@
 
         function places(sortByDistance) {
             if (sortByDistance) {
-                console.log('1');
                 $cordovaGeolocation
                     .getCurrentPosition({maximumAge: 0})
                     .then(function sc(position) {
-                        console.log('2');
                         var params = {
                             closest: true,
                             categorySlug: vm.category.slug,
@@ -79,6 +79,13 @@
                     $scope.$broadcast('distanceCalculated', response.places);
                 }, function ec(error) { $ionicLoading.hide() });
             }
+        }
+
+        function searchPlaces() {
+            $http.get(apiUrl + '/search/' + vm.searchQuery).then(function(response) {
+                vm.places = response.data.places;
+                $scope.$broadcast('scroll.refreshComplete');
+            });
         }
     }
 })();

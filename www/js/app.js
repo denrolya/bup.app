@@ -20,6 +20,16 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
                 StatusBar.styleDefault();
             }
 
+            $rootScope.showSearch = false;
+
+            // Close search on page change
+            $rootScope.$on("$locationChangeStart", function(event) {
+                $rootScope.showSearch = false;
+            });
+            $rootScope.toggleSearch = function() {
+                $rootScope.showSearch = !$rootScope.showSearch;
+            }
+
             $rootScope.hasBackView = function() {
                 return $ionicHistory.backView() !== null;
             }
@@ -31,6 +41,10 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
             $rootScope.goToLink = function(link) {
                 window.open(link, '_system', 'location=yes');
                 return false;
+            }
+
+            $rootScope.getNumber = function(num) {
+                return new Array(num);
             }
         });
     })

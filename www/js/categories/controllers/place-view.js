@@ -73,9 +73,5 @@
             infowindow.open(map, marker);
             map.setCenter(marker.getPosition());
         }
-
-        function getNumber(num) {
-            return new Array(num);
-        }
     }
 })();
