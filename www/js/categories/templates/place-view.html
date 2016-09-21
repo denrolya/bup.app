@@ -19,13 +19,13 @@
             <div class="row">
                 <div class="col">Our Rating:</div>
                 <div class="col col-67 price-indicator">
-                    <span class="ion-star" ng-repeat="i in vm.getNumber(vm.place.rating) track by $index"></span>
+                    <span class="ion-star" ng-repeat="i in getNumber(vm.place.rating) track by $index"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">Price Range:</div>
                 <div class="col col-67 rating-indicator">
-                    <span class="ion-social-usd" ng-repeat="i in vm.getNumber(vm.place.priceRange) track by $index"></span>
+                    <span class="ion-social-usd" ng-repeat="i in getNumber(vm.place.priceRange) track by $index"></span>
                 </div>
             </div>
         </div>
