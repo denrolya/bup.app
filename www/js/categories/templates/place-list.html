@@ -24,14 +24,13 @@
                     <div class="text-content text-shadowed">
                         <h1>{{ place.name }}</h1>
                         <p class="description">{{ place.shortDescription }}</p>
-                        <div>
-                        <span class="pull-left distance">
-                            {{ place.distance }}
-                        </span>
-                        <span class="pull-right">
-                            <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(place.rating) track by $index"></span>
-                        </span>
-                            <div class="cleafix"></div>
+                        <div class="place-rating-distance clearfix">
+                            <span class="pull-left distance">
+                                {{ place.distance }}
+                            </span>
+                            <span class="pull-right">
+                                <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(place.rating) track by $index"></span>
+                            </span>
                         </div>
                     </div>
 
