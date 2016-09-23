@@ -40,14 +40,18 @@
                                 $scope.$broadcast('scroll.refreshComplete');
                                 vm.place.distance = response.rows[0].elements[0].distance.text;
                                 $scope.$apply();
+                            }, function(error) {
+                                $scope.$broadcast('scroll.refreshComplete');
                             });
+
                         }, function() {
-                            handleLocationError(true, infoWindow, map.getCenter());
+                            $scope.$broadcast('scroll.refreshComplete');
                         });
                 } else {
-                    // Browser doesn't support Geolocation
-                    handleLocationError(false, infoWindow, map.getCenter());
+                    $scope.$broadcast('scroll.refreshComplete');
                 }
+            }, function(error) {
+                $scope.$broadcast('scroll.refreshComplete');
             });
         }
 

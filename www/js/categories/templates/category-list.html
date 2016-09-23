@@ -10,10 +10,11 @@
 
         <ion-list class="category-list">
             <ion-item
-                ng-repeat="category in vm.categories"
-                ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})">
-                <h1 class="category-name">{{ category.name }}</h1>
-                <small class="category-listings-count">{{ category.placesCount }} Listings</small>
+                ng-repeat="category in vm.categories">
+                <div class="item-content">
+                    <h1 class="category-name" ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})">{{ category.name }}</h1>
+                    <small class="category-listings-count">{{ category.placesCount }} Listings</small>
+                </div>
             </ion-item>
         </ion-list>
 

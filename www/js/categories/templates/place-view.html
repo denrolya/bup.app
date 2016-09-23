@@ -2,16 +2,91 @@
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getPlace()"></ion-refresher>
 
-        <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.place.coverImage.uri }}');">
-            <div class="landing-hero-image-back-button" ng-if="hasBackView()">
-                <a href="" ng-click="goBack()">
-                    <span class="ion-android-arrow-back"></span> Back
-                </a>
-            </div>
-            <div class="landing-hero-image-captions">
-                <span class="ehic-big">{{ vm.place.name }}</span>
-                <span class="ehic-small">{{ vm.place.address }}</span>
-                <span class="ehic-med">{{ vm.place.distance }}</span>
+        <style>
+            .landing-hero-image img {
+                height: 100%;
+            }
+
+            .place-title {
+                position: relative;
+                top: 30px;
+                font-weight: 900;
+            }
+
+            .place-short-description {
+                position: relative;
+                top: 50px;
+                font-size: 15px;
+            }
+
+            .place-rating-distance {
+                position: absolute;
+                display: block;
+                bottom: 20px;
+                width: calc(100% - 60px);
+                padding: 0;
+            }
+
+            .landing-hero-image-captions {
+                height: 100%; width: 100%;
+                padding: 30px;
+                position: absolute;
+                top: 0;
+            }
+
+            .landing-hero-image-captions h1,
+            .landing-hero-image-captions h4,
+            .landing-hero-image-captions h5 {
+                color: white;
+            }
+
+            .landing-recomendation {
+                padding: 0 20px;
+            }
+
+            .landing-recomendation h5 {
+                font-family: Open Sans, serif;
+                font-size: 16px;
+            }
+
+            .landing-recomendation h2 {
+                margin-top: 0;
+                font-weight: 900;
+                font-size: 24px;
+            }
+
+            .landing-recomendation blockquote {
+                margin: 10px 0 0; padding: 10px 0 0;
+                border: none;
+                font-size:13px;
+            }
+            .grad {
+                height: 10px;
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dbdbdb+0,e8e8e8+16,fefefe+72,e5e5e5+95,d1d1d1+100 */
+                background: #dbdbdb; /* Old browsers */
+                background: -moz-linear-gradient(top,  #dbdbdb 0%, #e8e8e8 16%, #fefefe 72%, #e5e5e5 95%, #d1d1d1 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(top,  #dbdbdb 0%,#e8e8e8 16%,#fefefe 72%,#e5e5e5 95%,#d1d1d1 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to bottom,  #dbdbdb 0%,#e8e8e8 16%,#fefefe 72%,#e5e5e5 95%,#d1d1d1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#d1d1d1',GradientType=0 ); /* IE6-9 */
+
+            }
+        </style>
+
+        <div class="landing-hero-image landing-hero-image-with-captions">
+            <img ng-src="{{ vm.place.coverImage.uri }}" alt="">
+            <div class="landing-hero-image-captions text-shadowed">
+                <div class="landing-hero-image-back-button" ng-if="hasBackView()">
+                    <a href="" ng-click="goBack()">Back</a>
+                </div>
+
+                <h1 class="place-title">{{ vm.place.name }}</h1>
+                <h4 class="place-short-description">{{ vm.place.shortDescription }}</h4>
+                <div class="place-rating-distance clearfix">
+                    <h5 class="pull-left distance">{{ vm.place.distance }}</h5>
+                    <h5 class="pull-right">
+                        <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(vm.place.rating) track by $index"></span>
+                    </h5>
+                </div>
             </div>
         </div>
 
@@ -30,7 +105,23 @@
             </div>
         </div>
 
+        <div class="landing-recomendation">
+            <div class="row row-unpadded">
+                <div class="col col-50">
+                    <h5>We recommend:</h5>
+                    <h2>Ginger & Chicken Salad</h2>
+                </div>
+                <div class="col col-50">
+                    <blockquote>
+                        Coffee here is roasted to perfection and you can't go wrong with an espresso
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="grad"></div>
+
         <div class="landing-paragraphs">
+            <h3>Summary:</h3>
             <div ng-bind-html="vm.place.fullDescription"></div>
         </div>
 

@@ -10,59 +10,33 @@
             <div ng-show="!showSearch">
                 <h1 class="category-name">{{ vm.category.name }}</h1>
                 <div>
-                    <div class="pull-left">
-                        <small class="category-listings-count">{{ vm.category.placesCount }} Listings</small>
-                    </div>
-                    <div class="pull-right">
-                        <div class="item item-input item-select">
-                            <div class="input-label">
-                                Lightsaber
-                            </div>
-                            <select>
-                                <option>Blue</option>
-                                <option selected="">Green</option>
-                                <option>Red</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
+                    <small class="category-listings-count">{{ vm.category.placesCount }} Listings</small>
                 </div>
             </div>
         </div>
 
-        <style>
-            .bg-image-list-item .text-content > * {
-                text-shadow: 1px 2px 3px #000;
-            }
-            .bg-image-list-item h1 {
-                color: white;
-                font-weight: 900;
-                font-size: 34px;
-                margin-bottom: 5px;
-            }
-        </style>
+            <ion-list class="bg-image-list" ng-show="vm.places.length > 0">
+                <ion-item ng-repeat="place in vm.places"
+                          ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})"
+                          class="bg-image-list-item bg-list-item-with-description">
 
-        <div class="bg-image-list" ng-show="vm.places.length > 0">
-            <div collection-repeat="place in vm.places"
-                 item-height="200px" item-width="100%"
-                 ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})"
-                 class="bg-image-list-item bg-list-item-with-description">
-
-                <img ng-src="{{ place.images[0].uri }}">
-                <span class="text-content">
-                    <h1>{{ place.name }}</h1>
-                    <p class="description">{{ place.shortDescription }}</p>
-                    <div>
+                    <img ng-src="{{ place.images[0].uri }}">
+                    <div class="text-content text-shadowed">
+                        <h1>{{ place.name }}</h1>
+                        <p class="description">{{ place.shortDescription }}</p>
+                        <div>
                         <span class="pull-left distance">
                             {{ place.distance }}
                         </span>
                         <span class="pull-right">
-                            <span class="ion-star" ng-repeat="i in getNumber(place.rating) track by $index"></span>
+                            <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(place.rating) track by $index"></span>
                         </span>
+                            <div class="cleafix"></div>
+                        </div>
                     </div>
-                </span>
-            </div>
-        </div>
+
+                </ion-item>
+            </ion-list>
 
         <div ng-show="vm.places.length === 0">
             <h4>No places were found in this category</h4>

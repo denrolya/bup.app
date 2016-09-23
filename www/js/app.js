@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers', 'ngResource', 'oc.lazyLoad', 'ngLodash', 'duScroll'])
 
-    .run(function ($ionicPlatform, $rootScope, $ionicHistory) {
+    .run(function ($ionicPlatform, $rootScope, $ionicHistory, $cordovaGeolocation) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -21,6 +21,7 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
             }
 
             $rootScope.showSearch = false;
+            $rootScope.position;
 
             // Close search on page change
             $rootScope.$on("$locationChangeStart", function(event) {
@@ -46,6 +47,20 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
             $rootScope.getNumber = function(num) {
                 return new Array(num);
             }
+
+            var watchOptions = {
+                timeout : 3000,
+                enableHighAccuracy: false // may cause errors if true
+            };
+
+            //var watch = $cordovaGeolocation.watchPosition(watchOptions);
+            //watch.then(
+            //    null,
+            //    function(err) { alert(err); },
+            //    function(position) {
+            //        $rootScope.position = position;
+            //    });
+
         });
     })
 

@@ -44,6 +44,7 @@
 
 .category-list .item {
     border:none;
+    padding: 0;
     border-bottom: 2px solid #ccc;
     min-height: 120px;
 }
@@ -61,16 +62,16 @@
 /** END CATEGORY LIST **/
 
 .bg-image-list-item.item-complex a.item-content {
-    display: inline;
     background: none;
     padding: 0;
     color: #fff;
+    height: 100%;
 }
 
 .bg-image-list-item {
     color: white;
-    background-size: 100%;
-    background-repeat: no-repeat;
+    height:200px;
+    width: 100%
 }
 
 .bg-image-list-item img {
@@ -80,6 +81,7 @@
 
 .bg-image-list-item .text-content {
     height: 100%;
+    width: 100%;
     font-weight: bold;
     font-size: 25px;
     letter-spacing: 0.1em;
@@ -87,6 +89,16 @@
     position: absolute;
     top: 0; left: 0;
     padding: 30px;
+}
+
+.text-shadowed * {
+    text-shadow: 1px 1px 8px #919191;
+}
+.bg-image-list-item h1 {
+    color: white;
+    font-weight: 900;
+    font-size: 34px;
+    margin-bottom: 5px;
 }
 
 .bg-image-list-item.bg-list-item-with-description .text-content span.header {
@@ -114,7 +126,7 @@
 =  Event or Place Landing =
 =========================*/
 .landing-hero-image {
-    height: 194px;
+    height: 320px;
 }
 
 .landing-map {
@@ -135,42 +147,11 @@
     position: relative;
 }
 
-.landing-hero-image-back-button {
-    position: absolute;
-    top: 10%;
-    left: 50px;
-}
+.landing-hero-image-back-button {}
 
 .landing-hero-image-back-button a {
     color: white;
     font-size: 20px;
-}
-
-.landing-hero-image-captions {
-    position: absolute;
-    color: white;
-    bottom: 15%;
-}
-
-.landing-hero-image-captions > span {
-    display: block;
-    line-height: 1.2em;
-    margin-left: 50px;
-    margin-bottom: 5px;
-}
-
-.ehic-big {
-    font-size: 2em;
-    font-weight: bold;
-}
-
-.ehic-small {
-    font-size: 1em;
-}
-
-.ehic-med {
-    font-size: 1.5em;
-    font-weight: bold;
 }
 
 .landing-header {
@@ -186,18 +167,17 @@
 }
 
 .landing-rates {
-    padding: 0 0 0 40px;
-}
-
-.landing-hero-image-captions .landing-address {
-    letter-spacing: .1em;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    padding: 0 30px 0 30px;
 }
 
 .landing-paragraphs {
-    padding: 25px 50px;
+    padding: 30px;
+}
+
+.landing-paragraphs h3 {
+    font-family: Open Sans;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 .landing-paragraphs p {
