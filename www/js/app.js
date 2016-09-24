@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers', 'ngResource', 'oc.lazyLoad', 'ngLodash', 'duScroll'])
 
-    .run(function ($ionicPlatform, $rootScope, $ionicHistory, $cordovaGeolocation) {
+    .run(function ($ionicPlatform, $rootScope, $cordovaGeolocation, $ionicPopup, $interval) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,46 +20,62 @@ angular.module('app', ['app-constants', 'ionic', 'ngCordova', 'app.controllers',
                 StatusBar.styleDefault();
             }
 
-            $rootScope.showSearch = false;
             $rootScope.position;
-
-            // Close search on page change
-            $rootScope.$on("$locationChangeStart", function(event) {
-                $rootScope.showSearch = false;
+            $rootScope.$watch('position', function(nv, ov) {
+                $rootScope.$broadcast('positionUpdated', nv);
             });
-            $rootScope.toggleSearch = function() {
-                $rootScope.showSearch = !$rootScope.showSearch;
+
+            checkLocation();
+
+            function checkLocation() {
+                if (!ionic.Platform.is('browser')) {
+                    window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
+                        if (!enabled) {
+                            askLocationAndStartWatcher();
+                        } else {
+                            startWatcher();
+                        }
+                    }, function ec(error) {});
+                } else {
+                    startWatcher();
+                }
             }
 
-            $rootScope.hasBackView = function() {
-                return $ionicHistory.backView() !== null;
+            function startWatcher() {
+                console.log('startWatcher() begin');
+                if (!ionic.Platform.is('browser')) {
+                    var watch = $cordovaGeolocation.watchPosition({timeout: 3000, enableHighAccuracy: true});
+                    watch.then(null,
+                        function (err) {
+                            console.log('error happened in startWatcher()');
+                        },
+                        function (position) {
+                            $rootScope.position = position;
+                            console.log('position updated');
+                        });
+                } else {
+                    $interval(function() {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            $rootScope.position = position
+                            console.log('position updated');
+                        }, function ec(error) {}, {enableHighAccuracy: true});
+                    }, 3000)
+                }
             }
 
-            $rootScope.goBack = function () {
-                $ionicHistory.goBack();
-            };
-
-            $rootScope.goToLink = function(link) {
-                window.open(link, '_system', 'location=yes');
-                return false;
+            function askLocationAndStartWatcher() {
+                window.cordova.plugins.locationAccuracy.canRequest(function(canRequest) {
+                    if(canRequest) {
+                        window.cordova.plugins.locationAccuracy.request(function(success) { console.log('start watcher from askLocation'); startWatcher();  }, function(error) {
+                            //if(error.code !== window.cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED){
+                            //    if(window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")){
+                            //        window.cordova.plugins.diagnostic.switchToLocationSettings();
+                            //    }
+                            //}
+                        }, window.cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+                    }
+                });
             }
-
-            $rootScope.getNumber = function(num) {
-                return new Array(num);
-            }
-
-            var watchOptions = {
-                timeout : 3000,
-                enableHighAccuracy: false // may cause errors if true
-            };
-
-            //var watch = $cordovaGeolocation.watchPosition(watchOptions);
-            //watch.then(
-            //    null,
-            //    function(err) { alert(err); },
-            //    function(position) {
-            //        $rootScope.position = position;
-            //    });
 
         });
     })

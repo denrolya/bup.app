@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+    .controller('AppCtrl', function ($rootScope, $scope, $ionicHistory) {
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
@@ -8,34 +8,31 @@ angular.module('app.controllers', [])
         //$scope.$on('$ionicView.enter', function(e) {
         //});
 
-        // Form data for the login modal
-        $scope.loginData = {};
+        $rootScope.showSearch = false;
+        $rootScope.position;
 
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
+        // Close search on page change
+        $rootScope.$on("$locationChangeStart", function(event) {
+            $rootScope.showSearch = false;
         });
+        $rootScope.toggleSearch = function() {
+            $rootScope.showSearch = !$rootScope.showSearch;
+        }
 
-        // Triggered in the login modal to close it
-        $scope.closeLogin = function () {
-            $scope.modal.hide();
+        $rootScope.hasBackView = function() {
+            return $ionicHistory.backView() !== null;
+        }
+
+        $rootScope.goBack = function () {
+            $ionicHistory.goBack();
         };
 
-        // Open the login modal
-        $scope.login = function () {
-            $scope.modal.show();
-        };
+        $rootScope.goToLink = function(link) {
+            window.open(link, '_system', 'location=yes');
+            return false;
+        }
 
-        // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            $timeout(function () {
-                $scope.closeLogin();
-            }, 1000);
-        };
+        $rootScope.getNumber = function(num) {
+            return new Array(num);
+        }
     });

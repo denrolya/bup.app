@@ -5,8 +5,8 @@
         .module('app')
         .controller('PlaceViewController', PlaceViewController);
 
-    PlaceViewController.$inject = ['$scope', '$stateParams', '$cordovaGeolocation', 'Place'];
-    function PlaceViewController($scope, $stateParams, $cordovaGeolocation, Place) {
+    PlaceViewController.$inject = ['$rootScope', '$scope', '$stateParams', '$cordovaGeolocation', 'Place'];
+    function PlaceViewController($rootScope, $scope, $stateParams, $cordovaGeolocation, Place) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -19,40 +19,21 @@
         vm.getPlace();
 
         function getPlace() {
-            Place.get({placeSlug: $stateParams.placeSlug}, function(response) {
-                vm.place = response.place;
-                vm.place.coverImage = vm.place.images[Math.floor(Math.random()*vm.place.images.length)]
-                vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
-                vm.initializeMap(vm.place);
-
-                if (navigator.geolocation) {
-                    $cordovaGeolocation
-                        .getCurrentPosition()
-                        .then(function(position) {
-                            var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                                placeLocation = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
-
-                            distanceMatrixService.getDistanceMatrix({
-                                origins: [currentLocation],
-                                destinations: [placeLocation],
-                                travelMode: 'WALKING',
-                            }, function(response, status) {
-                                $scope.$broadcast('scroll.refreshComplete');
-                                vm.place.distance = response.rows[0].elements[0].distance.text;
-                                $scope.$apply();
-                            }, function(error) {
-                                $scope.$broadcast('scroll.refreshComplete');
-                            });
-
-                        }, function() {
-                            $scope.$broadcast('scroll.refreshComplete');
-                        });
-                } else {
-                    $scope.$broadcast('scroll.refreshComplete');
+            if ($rootScope.position) {
+                var params = {
+                    latitude: $rootScope.position.coords.latitude, longitude: $rootScope.position.coords.longitude,
+                    placeSlug: $stateParams.placeSlug
                 }
-            }, function(error) {
-                $scope.$broadcast('scroll.refreshComplete');
-            });
+                Place.get(params, function (response) {
+                    vm.place = response.place;
+                    vm.place.coverImage = vm.place.images[Math.floor(Math.random() * vm.place.images.length)]
+                    vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
+                    vm.initializeMap(vm.place);
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, function (error) {
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+            }
         }
 
         function initializeMap(place) {

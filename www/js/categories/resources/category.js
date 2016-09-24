@@ -18,6 +18,10 @@
             getPlaces: {
                 method: 'GET',
                 url: apiUrl + '/categories/:categorySlug/places'
+            },
+            getDistanceToPlaces: {
+                method: 'GET',
+                url: apiUrl + '/distance'
             }
         });
     }
