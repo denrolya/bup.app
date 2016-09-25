@@ -26,8 +26,8 @@
 
         $scope.$on('$ionicView.enter', function() {
             destroyEventListener = $rootScope.$on('positionRefreshed', function(e, args) {
-                if (vm.places.length === 0) {
-                    console.log('no places. position was set. getting places...');
+                if (vm.places.length === 0 || !vm.places[0].distance) {
+                    console.log('no places or no distances to places. position was set. getting places...');
                     places(true);
                 } else {
                     console.log('updating distance to places...');
@@ -49,7 +49,11 @@
                 } else {
                     window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
                         if (!enabled) {
+                            console.log('b');
                             places(false);
+                        } else {
+                            console.log('c');
+                            $rootScope.startPositionWatcher();
                         }
                     });
                 }
