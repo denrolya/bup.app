@@ -15,23 +15,40 @@
 
         vm.getPlace = getPlace;
         vm.initializeMap = initializeMap;
+        vm.sendGetPlaceRequest = sendGetPlaceRequest;
+
+        var destroyEventListener;
+
+        $scope.$on('$ionicView.enter', function() {
+            destroyEventListener = $rootScope.$on('positionRefreshed', function(e, args) {
+                vm.getPlace();
+            });
+        });
+
+        $scope.$on('$ionicView.leave', function() {
+            destroyEventListener();
+        });
 
         vm.getPlace();
 
         function getPlace() {
-            if ($rootScope.position) {
-                var params = {
-                    latitude: $rootScope.position.coords.latitude, longitude: $rootScope.position.coords.longitude,
+            if (!ionic.Platform.is('browser')) {
+                window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
+                    var params = (!enabled)
+                        ? {placeSlug: $stateParams.placeSlug}
+                        : {
+                        latitude: $rootScope.position.coords.latitude,
+                        longitude: $rootScope.position.coords.longitude,
+                        placeSlug: $stateParams.placeSlug
+                    };
+
+                    vm.sendGetPlaceRequest(params);
+                });
+            } else {
+                vm.sendGetPlaceRequest({
+                    latitude: $rootScope.position.coords.latitude,
+                    longitude: $rootScope.position.coords.longitude,
                     placeSlug: $stateParams.placeSlug
-                }
-                Place.get(params, function (response) {
-                    vm.place = response.place;
-                    vm.place.coverImage = vm.place.images[Math.floor(Math.random() * vm.place.images.length)]
-                    vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
-                    vm.initializeMap(vm.place);
-                    $scope.$broadcast('scroll.refreshComplete');
-                }, function (error) {
-                    $scope.$broadcast('scroll.refreshComplete');
                 });
             }
         }
@@ -56,6 +73,18 @@
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.address);
             infowindow.open(map, marker);
             map.setCenter(marker.getPosition());
+        }
+
+        function sendGetPlaceRequest(params) {
+            Place.get(params, function (response) {
+                vm.place = response.place;
+                vm.place.coverImage = vm.place.images[Math.floor(Math.random() * vm.place.images.length)]
+                vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
+                vm.initializeMap(vm.place);
+                $scope.$broadcast('scroll.refreshComplete');
+            }, function (error) {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
         }
     }
 })();

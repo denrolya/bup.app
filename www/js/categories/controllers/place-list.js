@@ -49,10 +49,8 @@
                 } else {
                     window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
                         if (!enabled) {
-                            console.log('b');
                             places(false);
                         } else {
-                            console.log('c');
                             $rootScope.startPositionWatcher();
                         }
                     });
