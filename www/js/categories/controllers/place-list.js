@@ -25,8 +25,14 @@
         var destroyEventListener;
 
         $scope.$on('$ionicView.enter', function() {
-            destroyEventListener = $rootScope.$on('positionUpdated', function(e, args) {
-                vm.updateDistances();
+            destroyEventListener = $rootScope.$on('positionRefreshed', function(e, args) {
+                if (vm.places.length === 0) {
+                    console.log('no places. position was set. getting places...');
+                    places(true);
+                } else {
+                    console.log('updating distance to places...');
+                    vm.updateDistances();
+                }
             });
         });
 
@@ -37,10 +43,16 @@
         $scope.cancel = $ionicLoading.hide();
         function getPlaces() {
             if (!ionic.Platform.is('browser')) {
-                window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
-                    if (enabled) { places(true) }
-                    else { places(false) }
-                });
+                if ($rootScope.isPositionWatcherStarted && $rootScope.position) {
+                    console.log('position is set. getting places...');
+                    places(true);
+                } else {
+                    window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
+                        if (!enabled) {
+                            places(false);
+                        }
+                    });
+                }
             } else {
                 places(true);
             }
@@ -71,6 +83,7 @@
                     });
                     vm.places = response.places;
                     $scope.$broadcast('scroll.refreshComplete');
+                    $ionicLoading.hide();
                 }, function ec(error) {
                     $scope.$broadcast('scroll.refreshComplete');
                     $ionicLoading.hide()

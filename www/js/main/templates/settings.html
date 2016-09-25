@@ -1,0 +1,20 @@
+<ion-view hide-back-button="true">
+    <ion-content>
+
+        <h2>Position refresh interval</h2>
+
+        <div class="range">
+            <i class="ion-ios-timer-outline"></i>
+            <input type="range" name="volume"
+                   min="{{ 2 * 60 * 1000 }}"
+                   max="{{ 25 * 60 * 1000 }}"
+                   step="{{ 60 * 1000 }}"
+                   value="33"
+                   ng-model="vm.positionRefreshInterval"
+                   ng-change="vm.updatePositionRefreshInterval()"
+            >
+            <i class="ion-ios-timer"></i>
+        </div>
+        {{ vm.positionRefreshInterval / (1000 * 60) }} mins
+    </ion-content>
+</ion-view>

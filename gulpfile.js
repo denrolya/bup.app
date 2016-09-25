@@ -20,7 +20,7 @@ gulp.task('replace', function () {
   var settings = JSON.parse(fs.readFileSync('./config/' + filename, 'utf8'));
 
 // Replace each placeholder with the correct value for the variable.
-  gulp.src('www/js/app-constants.js')
+  gulp.src('www/js/main/constants/constants.js')
       .pipe(replace({
         patterns: [
           {
