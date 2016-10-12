@@ -5,8 +5,8 @@
         .module('app')
         .controller('CalendarController', CalendarController);
 
-    CalendarController.$inject = ['$scope', '$state', 'Event'];
-    function CalendarController($scope, $state, Event) {
+    CalendarController.$inject = ['$scope', '$rootScope', '$state', 'Event', 'lodash'];
+    function CalendarController($scope, $rootScope, $state, Event, lodash) {
         var vm = this;
 
         vm.events = [];
@@ -16,7 +16,14 @@
         vm.getEvents();
 
         function getEvents() {
-            Event.getGroupedFromToday(function(response) {
+            Event.getGroupedFromToday({latitude: $rootScope.position.coords.latitude, longitude: $rootScope.position.coords.longitude},
+            function(response) {
+                angular.forEach(response.events, function(v,k) {
+                    var newkey = moment(k).format('dddd Do');
+                    delete this[k];
+                    this[newkey] = v;
+                }, response.events);
+
                 vm.events = response.events;
                 $scope.$broadcast('scroll.refreshComplete');
             });

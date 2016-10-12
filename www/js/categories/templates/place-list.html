@@ -15,27 +15,27 @@
             </div>
         </div>
 
-            <ion-list class="bg-image-list" ng-show="vm.places.length > 0">
-                <ion-item ng-repeat="place in vm.places"
-                          ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})"
-                          class="bg-image-list-item bg-list-item-with-description">
+        <ion-list class="bg-image-list" ng-show="vm.places.length > 0">
+            <ion-item ng-repeat="place in vm.places"
+                      ui-sref="app.category.place.place-view({categorySlug: vm.categorySlug, placeSlug: place.slug})"
+                      class="bg-image-list-item bg-list-item-with-description">
 
-                    <img ng-src="{{ place.images[0].uri }}">
-                    <div class="text-content text-shadowed">
-                        <h1>{{ place.name }}</h1>
-                        <p class="description">{{ place.shortDescription }}</p>
-                        <div class="place-rating-distance clearfix">
-                            <span class="pull-left distance">
-                                {{ place.distance }}
-                            </span>
-                            <span class="pull-right">
-                                <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(place.rating) track by $index"></span>
-                            </span>
-                        </div>
+                <img ng-src="{{ place.images[0].uri }}">
+                <div class="text-content text-shadowed">
+                    <h1>{{ place.name }}</h1>
+                    <p class="description">{{ place.shortDescription }}</p>
+                    <div class="place-rating-distance clearfix">
+                        <span class="pull-left distance">
+                            {{ place.distance }}
+                        </span>
+                        <span class="pull-right">
+                            <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(place.rating) track by $index"></span>
+                        </span>
                     </div>
+                </div>
 
-                </ion-item>
-            </ion-list>
+            </ion-item>
+        </ion-list>
 
         <div ng-show="vm.places.length === 0">
             <h4>No places were found in this category</h4>

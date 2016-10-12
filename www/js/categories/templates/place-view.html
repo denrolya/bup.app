@@ -9,9 +9,9 @@
                     <a href="" ng-click="goBack()">Back</a>
                 </div>
 
-                <h1 class="place-title">{{ vm.place.name }}</h1>
-                <h4 class="place-short-description">{{ vm.place.shortDescription }}</h4>
-                <div class="place-rating-distance clearfix">
+                <h1 class="item-title">{{ vm.place.name }}</h1>
+                <h4 class="item-short-description">{{ vm.place.shortDescription }}</h4>
+                <div class="item-rating-distance clearfix">
                     <h5 class="pull-left distance">{{ vm.place.distance }}</h5>
                     <h5 class="pull-right">
                         <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(vm.place.rating) track by $index"></span>
