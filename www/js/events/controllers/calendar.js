@@ -16,8 +16,11 @@
         vm.getEvents();
 
         function getEvents() {
-            Event.getGroupedFromToday({latitude: $rootScope.position.coords.latitude, longitude: $rootScope.position.coords.longitude},
-            function(response) {
+            var params = ($rootScope.position)
+                ? {latitude: $rootScope.position.coords.latitude, longitude: $rootScope.position.coords.longitude}
+                : {};
+
+            Event.getGroupedFromToday(params, function(response) {
                 angular.forEach(response.events, function(v,k) {
                     var newkey = moment(k).format('dddd Do');
                     delete this[k];

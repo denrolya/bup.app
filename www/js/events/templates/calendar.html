@@ -5,21 +5,51 @@
                 on-refresh="vm.getEvents()">
         </ion-refresher>
 
+        <style>
+            .numberCircle {
+                border-radius: 50%;
+
+                width: 36px;
+                height: 36px;
+                padding: 8px;
+
+                background: #3f3f3f;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                display: inline-block;
+            }
+            .numberCircle.selected {
+                width: 39px; height: 39px;
+                border: 3px solid #baa7ff;
+            }
+        </style>
+
         <div class="unsticky-header">
             <div class="search-box" ng-show="showSearch">
                 <input type="text" placeholder="Search" ng-model="vm.searchQuery" ng-change="vm.searchPlaces()">
             </div>
 
             <div ng-show="!showSearch">
-                <h1 class="category-name">What's On</h1>
+                <h1 class="category-name" ng-if="!vm.displayWeek">What's On</h1>
+                <div class="text-center" ng-if="vm.displayWeek">
+                    <div class="numberCircle">M</div>
+                    <div class="numberCircle selected">T</div>
+                    <div class="numberCircle">W</div>
+                    <div class="numberCircle">T</div>
+                    <div class="numberCircle">F</div>
+                    <div class="numberCircle">S</div>
+                    <div class="numberCircle">S</div>
+                </div>
+
                 <div>
-                    <small class="category-listings-count">Today: 31st of September</small>
+                    <small class="category-listings-count">{{ keys(vm.events)[0] }}</small>
                 </div>
             </div>
         </div>
 
         <span class="calendar-list-item" ng-repeat="(date,events) in vm.events">
-            <div class="item item-divider" ng-if="$index !== 0">
+            <div class="item calendar-item-divider item-divider" ng-if="$index !== 0">
                 {{ date }}
             </div>
 
@@ -37,7 +67,7 @@
                             {{ event.distance }}
                         </span>
                         <span class="pull-right">
-                            <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in [1,2,3,4] track by $index"></span>
+                            <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(event.rating) track by $index"></span>
                         </span>
                         </div>
                     </div>

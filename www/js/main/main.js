@@ -22,6 +22,8 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
 
             var rs = $rootScope;
 
+            rs.keys = Object.keys;
+
             rs.positionRefreshInterval = positionRefreshInterval;
             rs.isPositionWatcherStarted = false;
 
