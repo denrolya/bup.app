@@ -5,13 +5,26 @@
         .module('app')
         .controller('CalendarController', CalendarController);
 
-    CalendarController.$inject = ['$scope', '$rootScope', '$state', 'Event', 'lodash'];
-    function CalendarController($scope, $rootScope, $state, Event, lodash) {
+    CalendarController.$inject = ['$scope', '$rootScope', '$state', 'Event', '$timeout', 'lodash', '$ionicScrollDelegate'];
+    function CalendarController($scope, $rootScope, $state, Event, $timeout, lodash, $ionicScrollDelegate) {
         var vm = this;
 
         vm.events = [];
 
+        vm.showWeekdays = false;
+        vm.datesDividers = [];
+        vm.subheaderDate = '';
+
         vm.getEvents = getEvents;
+        vm.onScroll = onScroll;
+        vm.goToDate = goToDate;
+
+        $scope.safeApply = function(fn) {
+            var phase = this.$root.$$phase;
+            if(phase == '$apply' || phase == '$digest') {
+                if(fn && (typeof(fn) === 'function')) { fn(); }
+            } else { this.$apply(fn); }
+        };
 
         vm.getEvents();
 
@@ -21,15 +34,59 @@
                 : {};
 
             Event.getGroupedFromToday(params, function(response) {
-                angular.forEach(response.events, function(v,k) {
-                    var newkey = moment(k).format('dddd Do');
-                    delete this[k];
-                    this[newkey] = v;
-                }, response.events);
+                $timeout(function() {
+                    var dividers = document.getElementsByClassName('calendar-item-divider');
+                    lodash.forEach(dividers, function(v, k) {
+                        vm.datesDividers.push(v);
+                    });
+                });
 
                 vm.events = response.events;
+                vm.subheaderDate = $rootScope.keys(vm.events)[0];
+                console.log(vm.subheaderDate);
                 $scope.$broadcast('scroll.refreshComplete');
             });
+        }
+
+        function onScroll() {
+            var top = $ionicScrollDelegate.getScrollPosition().top;
+
+            displayWeekdays((top > 100) ? true : false);
+            updateSubheaderDate(top);
+            $scope.safeApply();
+        }
+
+        function goToDate(date) {
+            var dateIndex = Object.keys(vm.events).indexOf(date),
+                top = $ionicScrollDelegate.getScrollPosition().top;
+
+            if (dateIndex !== 0) {
+                $ionicScrollDelegate.scrollTo(0, vm.datesDividers[dateIndex].offsetTop + 60);
+            } else {
+                $ionicScrollDelegate.scrollTop();
+            }
+            updateSubheaderDate(top);
+            $scope.safeApply();
+        }
+
+        function updateSubheaderDate(top) {
+            var lastDate = lodash.findLast(vm.datesDividers, function(v, k) {
+                return v.offsetTop <= top - 60;
+            });
+
+            var index = (lastDate) ? vm.datesDividers.indexOf(lastDate) : 0;
+            vm.subheaderDate = $rootScope.keys(vm.events)[index];
+        }
+
+        function displayWeekdays(toShow) {
+            vm.showWeekdays = (toShow) ? true : false;
+            var contentBlock = angular.element(document.getElementsByClassName('has-subheader')[0]);
+
+            if (toShow) {
+                contentBlock.addClass('weekdays-show');
+            } else {
+                contentBlock.removeClass('weekdays-show');
+            }
         }
     }
 })();

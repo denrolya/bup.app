@@ -1,3 +1,7 @@
+.has-calendar-subheader {
+    top: 163px;
+}
+
 .unsticky-header {
     display: block;
     height: 120px;
@@ -49,13 +53,13 @@
     min-height: 120px;
 }
 
-.category-list .item h1.category-name, .unsticky-header h1.category-name {
+.category-list .item h1.category-name, .unsticky-header h1.category-name, .bar-calendar h1.category-name {
     font-size: 34px;
     font-weight: 900;
     color: #493871;
     margin-bottom: 0;
 }
-.category-list .category-listings-count, .unsticky-header .category-listings-count {
+.category-list .category-listings-count, .unsticky-header .category-listings-count, .bar-calendar .category-listings-count {
     font-size: 18px;
     color: #bab9b9;
 }
@@ -281,5 +285,26 @@
     font-weight: 100;
     line-height: 60px;
     border: none;
+}
+.weekday-circle {
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    padding: 8px;
+    background: #3f3f3f;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    display: inline-block;
+}
+.weekday-circle.selected {
+    width: 39px; height: 39px;
+    border: 3px solid #baa7ff;
+}
+.bar-calendar {
+    display: block;
+    height: 120px;
+    font-size: 25px;
+    padding: 30px;
+    line-height: inherit;
 }
 /*============ CALENDAR ============*/

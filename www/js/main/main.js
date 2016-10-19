@@ -99,10 +99,15 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
     .filter('chunk', function(lodash) {
         return lodash.memoize(lodash.chunk);
     })
-    .filter('if', function () {
+    .filter('if', function() {
         return function(input, trueValue, falseValue) {
             return input ? trueValue : falseValue;
         };
+    })
+    .filter('moment', function() {
+        return function(date, dateFormat) {
+            return moment(date).format(dateFormat);
+        }
     })
 
     .config(function ($urlMatcherFactoryProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
