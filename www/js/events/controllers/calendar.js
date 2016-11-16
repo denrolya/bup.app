@@ -34,6 +34,9 @@
                 : {};
 
             Event.getGroupedFromToday(params, function(response) {
+                vm.events = response.events;
+                vm.subheaderDate = $rootScope.keys(vm.events)[0];
+
                 $timeout(function() {
                     var dividers = document.getElementsByClassName('calendar-item-divider');
                     lodash.forEach(dividers, function(v, k) {
@@ -41,15 +44,12 @@
                     });
                 });
 
-                vm.events = response.events;
-                vm.subheaderDate = $rootScope.keys(vm.events)[0];
-                console.log(vm.subheaderDate);
                 $scope.$broadcast('scroll.refreshComplete');
             });
         }
 
         function onScroll() {
-            var top = $ionicScrollDelegate.getScrollPosition().top;
+            var top = $ionicScrollDelegate.$getByHandle('handler').getScrollPosition().top;
 
             displayWeekdays((top > 100) ? true : false);
             updateSubheaderDate(top);
@@ -58,12 +58,12 @@
 
         function goToDate(date) {
             var dateIndex = Object.keys(vm.events).indexOf(date),
-                top = $ionicScrollDelegate.getScrollPosition().top;
+                top = $ionicScrollDelegate.$getByHandle('handler').getScrollPosition().top;
 
             if (dateIndex !== 0) {
-                $ionicScrollDelegate.scrollTo(0, vm.datesDividers[dateIndex].offsetTop + 60);
+                $ionicScrollDelegate.$getByHandle('handler').scrollTo(0, vm.datesDividers[dateIndex].offsetTop + 60);
             } else {
-                $ionicScrollDelegate.scrollTop();
+                $ionicScrollDelegate.$getByHandle('handler').scrollTop();
             }
             updateSubheaderDate(top);
             $scope.safeApply();

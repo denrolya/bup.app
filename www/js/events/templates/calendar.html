@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <ion-content on-scroll="vm.onScroll()" class="has-subheader has-calendar-subheader">
+    <ion-content on-scroll="vm.onScroll()" class="has-subheader has-calendar-subheader" delegate-handle="handler">
         <ion-refresher
                 pulling-text="Pull to refresh..."
                 on-refresh="vm.getEvents()">
