@@ -5,13 +5,13 @@
         </div>
 
         <div ng-show="!showSearch">
-            <h1 class="category-name" ng-if="!vm.showWeekdays">What's On</h1>
+            <h1 class="category-name text-primary" ng-if="!vm.showWeekdays">What's On</h1>
             <div class="text-center m-b-sm" ng-if="vm.showWeekdays">
                 <div class="weekday-circle" ng-repeat="(date, events) in vm.events" ng-click="vm.goToDate(date)" ng-class="{selected : date == vm.subheaderDate}">{{ (date | moment : 'dd').charAt(0) }}</div>
             </div>
 
             <div>
-                <small class="category-listings-count calendar-item-divider">{{ vm.subheaderDate | moment : 'dddd Do' }}</small>
+                <span class="calendar-item-divider text-size-normal text-muted">{{ vm.subheaderDate | moment : 'dddd Do' }}</span>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                     <img ng-src="{{ event.images[0].uri }}">
                     <div class="text-content text-shadowed">
                         <h1>{{ event.title }}</h1>
-                        <p class="description">{{ event.shortDescription }}</p>
+                        <p class="description text-size-small">{{ event.shortDescription }}</p>
                         <div class="item-rating-distance clearfix">
                         <span class="pull-left distance">
                             {{ event.distance }}

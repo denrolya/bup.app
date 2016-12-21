@@ -16,6 +16,8 @@ html, body {
     font-family: 'Open Sans';
 }
 
+a:focus, a:hover { text-decoration: none }
+
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Montserrat', sans-serif;
 }
@@ -349,4 +351,33 @@ body, .bar.bar-stable .title {
 }
 .space-30 {
     margin: 30px 0;
+}
+
+/* FONTS */
+.text-lighter {
+    font-weight: lighter;
+}
+.text-normal {
+    font-weight: normal;
+}
+.text-bold {
+    font-weight: bold;
+}
+.text-bolder {
+    font-weight: bolder;
+}
+.text-primary {
+    color: #493871;
+}
+.text-muted {
+    color: #bab9b9;
+}
+.text-size-smaller {
+    font-size: 13px;
+}
+.text-size-small {
+    font-size: 16px;
+}
+.text-size-normal {
+    font-size: 18px;
 }

@@ -153,6 +153,14 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
                 templateUrl: 'js/main/templates/menu.html',
                 controller: 'AppCtrl'
             })
+            .state('app.index', {
+                url: '/index',
+                views: {
+                    'menuContent@app': {
+                        templateUrl: 'js/main/templates/index.html'
+                    }
+                }
+            })
             .state('app.settings', {
                 url: '/settings',
                 views: {
@@ -173,5 +181,5 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
                 }
             });
 
-        $urlRouterProvider.otherwise('/app/categories/');
+        $urlRouterProvider.otherwise('/app/index');
     });

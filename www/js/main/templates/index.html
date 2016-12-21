@@ -1,0 +1,32 @@
+<ion-view hide-back-button="true">
+    <ion-content>
+        <style>
+            #index-wrapper {
+                height: calc(100% - 60px);
+                padding: 30px;
+            }
+            #index-wrapper a {
+                height: 50%;
+                padding-top: 15%;
+            }
+            #index-wrapper p {
+                line-height: 1.4em;
+            }
+        </style>
+        <div id="index-wrapper">
+            <a ui-sref="app.event.calendar" class="center-block">
+                <h1 class="text-primary text-bolder">What's On?</h1>
+                <p class="text-muted text-size-small">
+                    Check out our recommendations for what to do in the next 7 days in Budapest
+                </p>
+            </a>
+            <hr>
+            <a ui-sref="app.category.category-list" class="center-block">
+                <h1 class="text-primary text-bolder">Browse</h1>
+                <p class="text-muted text-size-small">
+                    Search the best places in Budapest by category. Find cafes, restaurants, nightclubs and many more.
+                </p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

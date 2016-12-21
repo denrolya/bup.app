@@ -12,8 +12,8 @@
             <ion-item
                 ng-repeat="category in vm.categories">
                 <div class="item-content">
-                    <h1 class="category-name" ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})">{{ category.name }}</h1>
-                    <small class="category-listings-count">{{ category.placesCount }} Listings</small>
+                    <h1 class="text-primary category-name" ui-sref="app.category.place.place-list({categorySlug: category.slug, category: category})">{{ category.name }}</h1>
+                    <span class="category-listings-count">{{ category.placesCount }} Listings</span>
                 </div>
             </ion-item>
         </ion-list>

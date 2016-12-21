@@ -56,11 +56,9 @@
 .category-list .item h1.category-name, .unsticky-header h1.category-name, .bar-calendar h1.category-name {
     font-size: 34px;
     font-weight: 900;
-    color: #493871;
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 .category-list .category-listings-count, .unsticky-header .category-listings-count, .bar-calendar .category-listings-count {
-    font-size: 18px;
     color: #bab9b9;
 }
 /** END CATEGORY LIST **/

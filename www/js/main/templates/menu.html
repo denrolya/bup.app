@@ -6,7 +6,7 @@
       </ion-nav-buttons>
 
       <ion-nav-title ng-show="!hasFilters">
-        <span style="font-size: 24px; letter-spacing: .2em">BP</span>
+        <span style="font-size: 24px; letter-spacing: .2em">Budapest</span>
       </ion-nav-title>
 
       <ion-nav-buttons side="right">
@@ -24,6 +24,9 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item menu-close ui-sref="app.index">
+          Homepage
+        </ion-item>
         <ion-item menu-close ui-sref="app.category.category-list">
           Categories
         </ion-item>
