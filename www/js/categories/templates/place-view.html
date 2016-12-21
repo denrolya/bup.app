@@ -21,15 +21,15 @@
         </div>
 
         <div class="landing-header landing-rates">
-            <div class="row">
-                <div class="col">Our Rating:</div>
-                <div class="col col-67 price-indicator">
+            <div class="row p-h-xs">
+                <div class="col p-n">Our Rating:</div>
+                <div class="col col-67 p-n price-indicator">
                     <span class="ion-star" ng-repeat="i in getNumber(vm.place.rating) track by $index"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">Price Range:</div>
-                <div class="col col-67 rating-indicator">
+            <div class="row p-h-xs">
+                <div class="col p-n">Price Range:</div>
+                <div class="col col-67 p-n rating-indicator">
                     <span class="ion-social-usd" ng-repeat="i in getNumber(vm.place.priceRange) track by $index"></span>
                 </div>
             </div>

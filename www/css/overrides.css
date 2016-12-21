@@ -80,6 +80,9 @@ body, .bar.bar-stable .title {
 }
 
 /* MARGINS & PADDINGS */
+.p-n {
+    padding: 0;
+}
 .p-xxs {
     padding: 5px;
 }
