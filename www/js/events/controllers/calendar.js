@@ -5,8 +5,8 @@
         .module('app')
         .controller('CalendarController', CalendarController);
 
-    CalendarController.$inject = ['$scope', '$rootScope', '$state', 'Event', '$timeout', 'lodash', '$ionicScrollDelegate'];
-    function CalendarController($scope, $rootScope, $state, Event, $timeout, lodash, $ionicScrollDelegate) {
+    CalendarController.$inject = ['$scope', '$rootScope', '$ionicLoading', 'Event', '$timeout', 'lodash', '$ionicScrollDelegate'];
+    function CalendarController($scope, $rootScope, $ionicLoading, Event, $timeout, lodash, $ionicScrollDelegate) {
         var vm = this;
 
         vm.events = [];
@@ -33,6 +33,8 @@
                 ? {latitude: $rootScope.position.coords.latitude, longitude: $rootScope.position.coords.longitude}
                 : {};
 
+            $ionicLoading.show();
+
             Event.getGroupedFromToday(params, function(response) {
                 vm.events = response.events;
                 vm.subheaderDate = $rootScope.keys(vm.events)[0];
@@ -45,6 +47,7 @@
                 });
 
                 $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
             });
         }
 

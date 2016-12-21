@@ -5,8 +5,8 @@
         .module('app')
         .controller('ViewController', ViewController);
 
-    ViewController.$inject = ['$scope', '$stateParams', 'Event'];
-    function ViewController($scope, $stateParams, Event) {
+    ViewController.$inject = ['$scope', '$stateParams', '$ionicLoading', 'Event'];
+    function ViewController($scope, $stateParams, $ionicLoading, Event) {
         var vm = this;
 
         vm.event = {};
@@ -15,9 +15,23 @@
         vm.initializeMap = initializeMap;
         vm.sendGetEventRequest = sendGetEventRequest;
 
+        var destroyEventListener;
+
+        $scope.$on('$ionicView.enter', function() {
+            destroyEventListener = $scope.$on('positionRefreshed', function(e, args) {
+                vm.getEvent();
+            });
+        });
+
+        $scope.$on('$ionicView.leave', function() {
+            destroyEventListener();
+        });
+
         vm.getEvent();
 
         function getEvent() {
+            $ionicLoading.show();
+
             if (!ionic.Platform.is('browser')) {
                 window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
                     var params = (!enabled)
@@ -80,8 +94,10 @@
 
                 vm.initializeMap(vm.event);
                 $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
             }, function (error) {
                 $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
             });
         }
     }

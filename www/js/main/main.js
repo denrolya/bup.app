@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers', 'ngResource', 'oc.lazyLoad', 'ngLodash', 'duScroll'])
 
-    .run(function ($ionicPlatform, $rootScope, $cordovaGeolocation, $ionicPopup, $interval, positionRefreshInterval) {
+    .run(function ($ionicPlatform, $rootScope, $cordovaGeolocation, $ionicPopup, $ionicLoading, $interval, positionRefreshInterval) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -24,6 +24,18 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
 
             rs.keys = Object.keys;
 
+            rs.$watch('isGettingPosition', function(nv, ov) {
+                if (nv) {
+                    $ionicLoading.show({ template: 'Getting your current position...' }).then(function(){
+                        console.log("Getting position...");
+                    });
+                } else {
+                    $ionicLoading.hide().then(function(){
+                        console.log("Getting position finished!");
+                    });
+                }
+            });
+
             rs.positionRefreshInterval = positionRefreshInterval;
             rs.isPositionWatcherStarted = false;
 
@@ -34,6 +46,13 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
             rs.getPositionOnDevice = getPositionOnDevice;
 
             rs.checkLocation();
+
+            rs.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+                if (rs.isPositionWatcherStarted && rs.isGettingPosition) {
+                    $ionicLoading.show({ tempalte: 'Hold on a sec...' });
+                }
+            });
+            rs.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { $ionicLoading.hide() });
 
             function checkLocation() {
                 if (!ionic.Platform.is('browser')) {
@@ -72,25 +91,36 @@ angular.module('app', ['app.constants', 'ionic', 'ngCordova', 'app.controllers',
             }
 
             function getPositionOnDevice() {
+                rs.isGettingPosition = true;
                 var options = {
                     timeout: rs.positionRefreshInterval,
                     maxAge: 0,
                     enableHighAccuracy: true
                 };
 
-                $cordovaGeolocation.getCurrentPosition(options)
-                    .then(function (position) {
-                        rs.position = position;
-                        console.log('position refreshed');
-                    },
-                    function (err) { console.log('error happened in startWatcher')});
+                $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
+                    rs.position = position;
+                    console.log('position refreshed');
+                    rs.isGettingPosition = false;
+                    $ionicLoading.hide();
+                }, function (err) {
+                    rs.isGettingPosition = false;
+                    console.log('error happened in startWatcher');
+                });
             }
 
             function getPositionInBrowser() {
+                rs.isGettingPosition = true;
+
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    rs.position = position
+                    rs.position = position;
                     console.log('position refreshsed');
-                }, function ec(error) {}, { enableHighAccuracy: true });
+                    rs.isGettingPosition = false;
+                    $ionicLoading.hide();
+                }, function ec(error) {
+                    rs.isGettingPosition = false;
+                    console.log('error happened in startWatcher');
+                }, { enableHighAccuracy: true });
             }
 
         });

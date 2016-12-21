@@ -5,8 +5,8 @@
         .module('app')
         .controller('PlaceViewController', PlaceViewController);
 
-    PlaceViewController.$inject = ['$rootScope', '$scope', '$stateParams', '$cordovaGeolocation', 'Place'];
-    function PlaceViewController($rootScope, $scope, $stateParams, $cordovaGeolocation, Place) {
+    PlaceViewController.$inject = ['$scope', '$stateParams', '$ionicLoading', 'Place'];
+    function PlaceViewController($scope, $stateParams, $ionicLoading, Place) {
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -20,7 +20,7 @@
         var destroyEventListener;
 
         $scope.$on('$ionicView.enter', function() {
-            destroyEventListener = $rootScope.$on('positionRefreshed', function(e, args) {
+            destroyEventListener = $scope.$on('positionRefreshed', function(e, args) {
                 vm.getPlace();
             });
         });
@@ -32,13 +32,15 @@
         vm.getPlace();
 
         function getPlace() {
+            $ionicLoading.show();
+
             if (!ionic.Platform.is('browser')) {
                 window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
                     var params = (!enabled)
                         ? {placeSlug: $stateParams.placeSlug}
                         : {
-                        latitude: $rootScope.position.coords.latitude,
-                        longitude: $rootScope.position.coords.longitude,
+                        latitude: $scope.position.coords.latitude,
+                        longitude: $scope.position.coords.longitude,
                         placeSlug: $stateParams.placeSlug
                     };
 
@@ -46,8 +48,8 @@
                 });
             } else {
                 vm.sendGetPlaceRequest({
-                    latitude: $rootScope.position.coords.latitude,
-                    longitude: $rootScope.position.coords.longitude,
+                    latitude: $scope.position.coords.latitude,
+                    longitude: $scope.position.coords.longitude,
                     placeSlug: $stateParams.placeSlug
                 });
             }
@@ -82,8 +84,10 @@
                 vm.place.location = new google.maps.LatLng(vm.place.latitude, vm.place.longitude);
                 vm.initializeMap(vm.place);
                 $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
             }, function (error) {
                 $scope.$broadcast('scroll.refreshComplete');
+                $ionicLoading.hide();
             });
         }
     }
