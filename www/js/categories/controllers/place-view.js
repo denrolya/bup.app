@@ -10,7 +10,6 @@
         var vm = this;
         var distanceMatrixService = new google.maps.DistanceMatrixService();
 
-        vm.categorySlug = $stateParams.categorySlug;
         vm.place = {};
 
         vm.getPlace = getPlace;
@@ -36,7 +35,7 @@
 
             if (!ionic.Platform.is('browser')) {
                 window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
-                    var params = (!enabled)
+                    var params = (!enabled || !scope.position)
                         ? {placeSlug: $stateParams.placeSlug}
                         : {
                         latitude: $scope.position.coords.latitude,
@@ -47,11 +46,12 @@
                     vm.sendGetPlaceRequest(params);
                 });
             } else {
-                vm.sendGetPlaceRequest({
-                    latitude: $scope.position.coords.latitude,
-                    longitude: $scope.position.coords.longitude,
-                    placeSlug: $stateParams.placeSlug
-                });
+                var params = ($scope.position)
+                ? { latitude: $scope.position.coords.latitude, longitude: $scope.position.coords.longitude,
+                    placeSlug: $stateParams.placeSlug }
+                : { placeSlug: $stateParams.placeSlug };
+
+                vm.sendGetPlaceRequest(params);
             }
         }
 
