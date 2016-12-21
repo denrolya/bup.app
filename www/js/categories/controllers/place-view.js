@@ -35,7 +35,7 @@
 
             if (!ionic.Platform.is('browser')) {
                 window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
-                    var params = (!enabled || !scope.position)
+                    var params = (!enabled || !$scope.position)
                         ? {placeSlug: $stateParams.placeSlug}
                         : {
                         latitude: $scope.position.coords.latitude,
