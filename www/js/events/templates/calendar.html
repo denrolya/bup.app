@@ -6,7 +6,7 @@
 
         <div ng-show="!showSearch">
             <h1 class="category-name" ng-if="!vm.showWeekdays">What's On</h1>
-            <div class="text-center" ng-if="vm.showWeekdays">
+            <div class="text-center m-b-sm" ng-if="vm.showWeekdays">
                 <div class="weekday-circle" ng-repeat="(date, events) in vm.events" ng-click="vm.goToDate(date)" ng-class="{selected : date == vm.subheaderDate}">{{ (date | moment : 'dd').charAt(0) }}</div>
             </div>
 

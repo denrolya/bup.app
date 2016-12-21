@@ -295,7 +295,7 @@
     text-align: center;
     font-size: 16px;
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 .weekday-circle.selected {
     width: 39px; height: 39px;

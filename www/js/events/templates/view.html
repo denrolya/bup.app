@@ -1,17 +1,25 @@
 <ion-view hide-nav-bar="true">
     <ion-content>
-        <div class="landing-hero-image landing-hero-image-with-captions" style="background-image: url('{{ vm.event.coverImage.uri }}');">
-            <div class="landing-hero-image-back-button" ng-if="hasBackView()">
-                <a href="" ng-click="goBack()">
-                    <span class="ion-android-arrow-back"></span> Back
-                </a>
-            </div>
-            <div class="landing-hero-image-captions">
-                <span class="ehic-big">{{ vm.event.title }}</span>
-                <span class="ehic-small">{{ vm.event.location }}</span>
-                <span class="ehic-med">1.8 km</span>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.getEvent()"></ion-refresher>
+
+        <div class="landing-hero-image landing-hero-image-with-captions">
+            <img ng-src="{{ vm.event.coverImage.uri }}" alt="">
+            <div class="landing-hero-image-captions text-shadowed">
+                <div class="landing-hero-image-back-button" ng-if="hasBackView()">
+                    <a href="" ng-click="goBack()">Back</a>
+                </div>
+
+                <h1 class="item-title">{{ vm.event.title }}</h1>
+                <h4 class="item-short-description">{{ vm.event.shortDescription }}</h4>
+                <div class="item-rating-distance clearfix">
+                    <h5 class="pull-left distance">{{ vm.event.distance }}</h5>
+                    <h5 class="pull-right">
+                        <span class="ion-star" style="font-size: 16px; letter-spacing: .2em" ng-repeat="i in getNumber(vm.event.rating) track by $index"></span>
+                    </h5>
+                </div>
             </div>
         </div>
+
         <div class="landing-header landing-event-header">
             <div class="row">
                 <div class="col">
@@ -26,7 +34,8 @@
         </div>
 
         <div class="landing-paragraphs">
-            <div ng-bind-html="vm.event.descriptionBlock1"></div>
+            <h3>Description:</h3>
+            <div ng-bind-html="vm.event.fullDescription"></div>
         </div>
 
         <ion-slide-box does-continue="true" show-pager="false" ng-if="vm.event.images">
@@ -34,10 +43,6 @@
                 <div class="landing-carousel-image" style="background-image: url('{{ image.uri }}');"></div>
             </ion-slide>
         </ion-slide-box>
-
-        <div class="landing-paragraphs">
-            <div ng-bind-html="vm.event.descriptionBlock2"></div>
-        </div>
 
         <div class="landing-header">
             <div class="row">
@@ -56,20 +61,24 @@
         </div>
 
         <div class="landing-credentials">
+            <div class="row" ng-if="vm.event.address">
+                <div class="col header">Address:</div>
+                <div class="col col-67">{{ vm.event.address }}</div>
+            </div>
             <div class="row" ng-if="vm.event.website">
                 <div class="col header">Website:</div>
-                <div class="col col-67"><a href="#">{{ vm.event.website }}</a></div>
+                <div class="col col-67"><a href="" ng-click="goToLink('{{ vm.event.website }}')">{{ vm.event.website | limitTo : 50 }}</a></div>
             </div>
             <div class="row" ng-if="vm.event.phonenumber">
-                <div class="col header">Telephone:</div>
-                <div class="col col-67"><a href="tel:0036707372913">{{ vm.event.phonenumber }}</a></div>
+                <div class="col header">Phone:</div>
+                <div class="col col-67"><a href="" ng-click="goToLink('tel:{{ vm.event.phonenumber }}')">{{ vm.event.phonenumber }}</a></div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="vm.event.opened">
                 <div class="col header">Open:</div>
                 <div class="col col-67">
-                    Mon-Fri: 7:00 - 21:00<br>
-                    Sat: 7:30 - 16:30<br>
-                    Sun: Closed
+                    <span style="display: block" ng-repeat="(day, hours) in vm.event.opened">
+                        {{ day }}: {{ hours.from | if : hours.from + " - " + hours.to : "Closed" }}
+                    </span>
                 </div>
             </div>
         </div>

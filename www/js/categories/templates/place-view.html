@@ -68,6 +68,10 @@
         </div>
 
         <div class="landing-credentials">
+            <div class="row" ng-if="vm.event.address">
+                <div class="col header">Address:</div>
+                <div class="col col-67">{{ vm.place.address }}</div>
+            </div>
             <div class="row" ng-if="vm.place.website">
                 <div class="col header">Website:</div>
                 <div class="col col-67"><a href="" ng-click="goToLink('{{ vm.place.website }}')">{{ vm.place.website | limitTo : 50 }}</a></div>
