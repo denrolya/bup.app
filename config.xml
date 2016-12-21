@@ -1,12 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.budapp222794" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Camel</name>
-    <description>
-        This is my application
-    </description>
-    <author email="rdenes93@gmail.com" href="http://example.com.com/">
-      Rolya Denes
-    </author>
+    <name>GreenApp Budapest</name>
+    <description>This is my application</description>
+    <author email="rdenes93@gmail.com" href="http://example.com.com/">Rolya Denes</author>
     <content src="index.html" />
     <access origin="*" />
     <preference name="webviewbounce" value="false" />
