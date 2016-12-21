@@ -13,19 +13,30 @@
 
         vm.getEvent = getEvent;
         vm.initializeMap = initializeMap;
+        vm.sendGetEventRequest = sendGetEventRequest;
 
         vm.getEvent();
 
         function getEvent() {
-            Event.get({eventSlug: $stateParams.eventSlug}, function(response) {
-                vm.event = response.event;
-                vm.event.dateFrom = new Date(vm.event.dateFrom);
-                vm.event.dateTo = new Date(vm.event.dateTo);
-                vm.event.coverImage = vm.event.images[Math.floor(Math.random()*vm.event.images.length)]
-                vm.event.location = new google.maps.LatLng(vm.event.latitude, vm.event.longitude);
+            if (!ionic.Platform.is('browser')) {
+                window.cordova.plugins.diagnostic.isLocationEnabled(function sc(enabled) {
+                    var params = (!enabled)
+                        ? {eventSlug: $stateParams.eventSlug}
+                        : {
+                        latitude: $scope.position.coords.latitude,
+                        longitude: $scope.position.coords.longitude,
+                        eventSlug: $stateParams.eventSlug
+                    };
 
-                vm.initializeMap(vm.event);
-            });
+                    vm.sendGetEventRequest(params);
+                });
+            } else {
+                vm.sendGetEventRequest({
+                    latitude: $scope.position.coords.latitude,
+                    longitude: $scope.position.coords.longitude,
+                    eventSlug: $stateParams.eventSlug
+                });
+            }
         }
 
         function initializeMap(event) {
@@ -59,42 +70,19 @@
             map.setCenter(marker.getPosition());
         }
 
-        //function initializeMap() {
-        //    var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-        //
-        //    var mapOptions = {
-        //        center: myLatlng,
-        //        zoom: 16,
-        //        zoomControl: true,
-        //        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-        //        mapTypeIds: ['roadmap', 'terrain'],
-        //        mapTypeControl: true,
-        //        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        //        styles: [{
-        //            featureType: 'all',
-        //            "stylers": [
-        //                { "invert_lightness": true },
-        //                { "gamma": 0.62 },
-        //                { "saturation": -9 },
-        //                { "lightness": 26 },
-        //                { "hue": "#00ffcc" }
-        //            ]
-        //        }]
-        //    };
-        //
-        //    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        //
-        //    navigator.geolocation.getCurrentPosition(function(pos) {
-        //        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        //
-        //        var myLocation = new google.maps.Marker({
-        //            position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-        //            map: map,
-        //            title: "My Location"
-        //        });
-        //    });
-        //
-        //    $scope.map = map;
-        //}
+        function sendGetEventRequest(params) {
+            Event.get(params, function(response) {
+                vm.event = response.event;
+                vm.event.dateFrom = new Date(vm.event.dateFrom);
+                vm.event.dateTo = new Date(vm.event.dateTo);
+                vm.event.coverImage = vm.event.images[Math.floor(Math.random()*vm.event.images.length)]
+                vm.event.location = new google.maps.LatLng(vm.event.latitude, vm.event.longitude);
+
+                vm.initializeMap(vm.event);
+                $scope.$broadcast('scroll.refreshComplete');
+            }, function (error) {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        }
     }
 })();
